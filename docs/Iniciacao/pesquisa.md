@@ -62,5 +62,6 @@ Khan Academy – conteúdos gratuitos em várias áreas
 
 edX – cursos de instituições como Harvard e MIT
 
-LinkedIn Learning – cursos voltados ao mercado de trabalho 
+LinkedIn Learning – cursos voltados ao mercado de trabalho
+
 TED – palestras inspiradoras que podem contar como horas complementares em alguns cursos
