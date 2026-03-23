@@ -52,3 +52,11 @@ Científicio Acadêmico - Audiências e Júris Simulados agentes (5 Horas) / Aud
 Empregabilidade, Empreendedorismo e Inovação - Atividades de Criação (50 Horas) / Atividades de Empregabilidade (30 Horas) / Auxílio na Organização de Eventos (5 Horas) / Evento de Empreendedorismo e Inovação (5 Horas) / Representante de turma (60 Horas) / Viagens e Excursões Acadêmicas e Ténicas (30 Horas)
 
 Sustentabilidade - Ações Ambientais (10 Horas) / Eventos de Sustentabilidade (5 Horas) / Reciclagem Sustentável (10 Horas) / Oficinas Sustentáveis (10 Horas)
+
+# Aplicativos Similares
+Plataformas de cursos e aprendizado: Coursera – cursos de universidades renomadas com certificado 
+Udemy – grande variedade de cursos práticos 
+Khan Academy – conteúdos gratuitos em várias áreas 
+edX – cursos de instituições como Harvard e MIT 
+LinkedIn Learning – cursos voltados ao mercado de trabalho 
+TED – palestras inspiradoras que podem contar como horas complementares em alguns cursos
