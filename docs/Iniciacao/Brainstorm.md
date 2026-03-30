@@ -67,7 +67,7 @@ Validação
 • Externas → precisam de:
 
     Documento
-    Análise manual
+    
 
 ## Conclusão
 
