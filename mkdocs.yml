@@ -1,18 +1,11 @@
 ---
-repo_url: https://github.com/jonh-carvalho/PBE_25.2_8003
+repo_url: https://github.com/jonh-carvalho/PBE_26.1_8003_I
 site_author: Jonh Carvalho
-site_name: PBE_25.2_8003
-copyright: Copyright ©️ 2025, Jonh Carvalho
+site_name: PBE_26.1_8003_I
+copyright: Copyright ©️ 2026, Jonh Carvalho
 
 nav: 
   - Home: index.md
-  - Disciplina:
-      - Aulas: Disciplina/aulas.md
-      - Ambiente: Disciplina/ambiente.md
-      - Github: Disciplina/github.md
-      - Mkdocs: Disciplina/mkdocs.md
-      - CodeSpace: Disciplina/codespace.md
-      - Avaliações: Disciplina/avaliacoes.md
   - Iniciação: 
       - Index: Iniciacao/index.md
       - Pesquisa: Iniciacao/pesquisa.md
@@ -93,13 +86,14 @@ markdown_extensions:
       permalink: true
 
 plugins:
-  - minify:
-      minify_html: true
   - search
+  - plantuml:
+      puml_url: http://www.plantuml.com/plantuml
 
 theme:
   name: material
-  logo: assets/ibmec_logo.png
+  logo: assets/logo.png
+  favicon: assets/icon.png
   palette:
     
     - media: "(prefers-color-scheme)"
