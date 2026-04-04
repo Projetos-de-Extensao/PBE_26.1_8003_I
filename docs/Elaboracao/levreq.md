@@ -33,20 +33,63 @@ title: Levantamento de Requisitos
 
 ### **4. Exemplo de Caso de Uso** (Exemplo)
 
-#### **UC01 - Realizar Pedido**
+UC01 – Realizar Login
 
-- **Atores:** Cliente, Sistema.
-- **Pré-condição:** Cliente está logado e com localização ativa.
-- **Fluxo Principal:**
-  1. Cliente seleciona um restaurante.
-  2. Cliente adiciona itens ao carrinho.
-  3. Cliente escolhe a forma de pagamento (cartão/PIX).
-  4. Sistema confirma o pedido e notifica o restaurante.
-- **Fluxos Alternativos:**
-  - **FA1:** Pagamento recusado → Sistema sugere nova tentativa ou outro método.
-  - **FA2:** Restaurante indisponível → Sistema recomenda opções similares.
-- **Pós-condição:** Pedido é registrado e entra na fila de preparo.
+Ator: Aluno/Admin
+Descrição: Permite acesso ao sistema
 
+Fluxo:
+
+Usuário insere login e senha
+Sistema valida credenciais
+Sistema libera acesso
+
+UC02 – Cadastrar Atividade Externa
+
+Ator: Aluno
+
+Fluxo:
+
+Aluno acessa área de atividades
+Preenche dados (tipo, carga horária, descrição)
+Anexa comprovante
+Envia solicitação
+Sistema salva como “pendente”
+
+UC03 – Validar Atividade
+
+Ator: Administrador
+
+Fluxo:
+
+Admin acessa atividades pendentes
+Analisa comprovante
+Aprova ou rejeita
+Sistema atualiza status
+Sistema contabiliza horas (se aprovado)
+
+UC04 – Consultar Horas
+
+Ator: Aluno
+
+Fluxo:
+
+Aluno acessa dashboard
+Sistema exibe:
+Total de horas
+Progresso
+Lista de atividades
+
+UC05 – Cadastrar Atividade Interna
+
+Ator: Administrador
+
+Fluxo: Admin cria atividade
+
+Admin cria atividade
+Define carga horária
+Associa alunos participantes
+Sistema lança horas automaticamente
 ---
 
 
