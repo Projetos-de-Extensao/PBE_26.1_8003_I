@@ -49,20 +49,6 @@ title: Levantamento de Requisitos
 
 ---
 
-### **5. Protótipo (Exemplo Simplificado)**
-
-- **Tela de Busca:** Barra de pesquisa + filtros (vegan, rápido, etc.).
-- **Carrinho:** Resumo dos itens + botão "Finalizar Pedido".
-
----
-
-### **6. Validação**
-
-- **XXXXX XXX:** Confirmar se o fluxo de atualização é viável.
-- **Teste A/B com Clientes:** Comparar duas versões...
-
-
---
 
 ### Diagrama de Casos de Uso (Exemplo)
 
@@ -128,10 +114,6 @@ end note
 4. **Notas**: Condições do cenário.
 
 ---
-
-### Protótipo
-
-Aqui está o protótipo de **telas do aplicativo de delivery** usando **Salt (PlantUML)**, alinhado ao caso de uso anterior:
 
 ---
 
