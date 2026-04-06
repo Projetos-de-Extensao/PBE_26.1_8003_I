@@ -723,27 +723,45 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#descricao" class="md-nav__link">
+  <a href="#uc01-realizar-login" class="md-nav__link">
     <span class="md-ellipsis">
-      Descrição:
+      UC01 – Realizar Login
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#criacao-de-uma-conta-no-sistema" class="md-nav__link">
+  <a href="#uc02-cadastrar-atividade-externa" class="md-nav__link">
     <span class="md-ellipsis">
-      Criação de uma conta no sistema
+      UC02 – Cadastrar Atividade Externa
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#entrada-do-usuario-no-sistema" class="md-nav__link">
+  <a href="#uc03-validar-atividade" class="md-nav__link">
     <span class="md-ellipsis">
-      Entrada do usuário no sistema
+      UC03 – Validar Atividade
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uc04-consultar-horas" class="md-nav__link">
+    <span class="md-ellipsis">
+      UC04 – Consultar Horas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uc05-cadastrar-atividade-interna" class="md-nav__link">
+    <span class="md-ellipsis">
+      UC05 – Cadastrar Atividade Interna
     </span>
   </a>
   
@@ -1044,146 +1062,48 @@
   <h1>Casos de Uso</h1>
 
 <h2 id="casos-de-uso">Casos de Uso<a class="headerlink" href="#casos-de-uso" title="Permanent link">&para;</a></h2>
-<h3 id="descricao">Descrição:<a class="headerlink" href="#descricao" title="Permanent link">&para;</a></h3>
-<ul>
-<li>
-<p>Contas</p>
-<ul>
-<li>Criação</li>
-<li>Entrada</li>
-<li>Alteração</li>
-<li>Recuperar Senha</li>
-<li>Exclusão Lógica</li>
-<li>Visualização</li>
-</ul>
-</li>
-<li>
-<p>Perfis</p>
-<ul>
-<li>Edição</li>
-<li>Pesquisar</li>
-<li>Visualização</li>
-<li>Seguir/Deixar de Seguir</li>
-</ul>
-</li>
-<li>
-<p>Postagens (Público)       </p>
-<ul>
-<li>Criação</li>
-<li>Exclusão</li>
-<li>Interação</li>
-<li>Visualização</li>
-</ul>
-</li>
-<li>
-<p>Mensagens (Privado)</p>
-<ul>
-<li>Criação</li>
-<li>Exclusão</li>
-<li>Visualização</li>
-</ul>
-</li>
-<li>
-<p>Galerias</p>
-<ul>
-<li>Albuns</li>
-</ul>
-</li>
-<li>Blogs</li>
-<li>Grupos</li>
-</ul>
-<h3 id="criacao-de-uma-conta-no-sistema">Criação de uma conta no sistema<a class="headerlink" href="#criacao-de-uma-conta-no-sistema" title="Permanent link">&para;</a></h3>
-<ul>
-<li>
-<p>Atores:</p>
-<ul>
-<li>Usuário</li>
-<li>Sistema</li>
-</ul>
-</li>
-<li>
-<p>Pré-Condições:</p>
-<ul>
-<li>Nenhuma</li>
-</ul>
-</li>
-<li>
-<p>Fluxo Básico:</p>
-<ol>
-<li>Usuário fornece e-mail, senha e confirmações</li>
-<li>Dados do Usuário são validados pelo Sistema</li>
-<li>Dados do Usuário são encriptados pelo Sistema</li>
-<li>Dados do Usuário são persistidos pelo Sistema</li>
-<li>Sistema gera um link com prazo de expiração</li>
-<li>Sistema envia e-mail de verificação, com o link, para o Usuário</li>
-<li>Usuário confirma o e-mail antes do link expirar</li>
-<li>Sistema confirma que o Cadastro do Usuário foi realizado com sucesso</li>
-<li>Sistema redireciona o Usuário para a página de Entrada</li>
-</ol>
-</li>
-<li>
-<p>Fluxos Alternativos:</p>
-<ul>
-<li>2a. E-mail do Usuário é inválido
-    2a1. Sistema exibe mensagem de erro</li>
-<li>2b. Senha do Usuário não respeita regras de segurança<ul>
-<li>2b1. Sistema exibe mensagem de erro</li>
-</ul>
-</li>
-<li>3a. Usuário tenta confirmar o e-mail depois de o link expirar<ul>
-<li>3a1. Sistema sugere que o Usuário realize um novo Cadastro</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="entrada-do-usuario-no-sistema">Entrada do usuário no sistema<a class="headerlink" href="#entrada-do-usuario-no-sistema" title="Permanent link">&para;</a></h3>
-<ul>
-<li>
-<p>Atores:</p>
-<ul>
-<li>Usuário</li>
-<li>Sistema</li>
-</ul>
-</li>
-<li>
-<p>Pré-Condições:
-    Usuário deve estar cadastrado</p>
-</li>
-<li>
-<p>Fluxo Básico:</p>
-<ul>
-<li>
-<ol>
-<li>Usuário fornece e-mail e senha</li>
-</ol>
-</li>
-<li>
-<ol>
-<li>Sistema autentica o Usuário</li>
-</ol>
-</li>
-<li>
-<ol>
-<li>Sistema redireciona o Usuário para a página inicial</li>
-</ol>
-</li>
-</ul>
-</li>
-<li>
-<p>Fluxos Alternativos:</p>
-<ul>
-<li>2a. Dados do Usuário Inválidos<ul>
-<li>2a1. Sistema exibe mensagem de erro</li>
-</ul>
-</li>
-<li>3a. Primeio acesso do Usuário<ul>
-<li>3a1. Sistema redireciona o Usuário para a página de edição de perfil</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<h3 id="uc01-realizar-login">UC01 – Realizar Login<a class="headerlink" href="#uc01-realizar-login" title="Permanent link">&para;</a></h3>
+<p>Ator: Aluno/Admin</p>
+<p>Descrição: Permite acesso ao sistema</p>
+<p>Fluxo:</p>
+<p>Usuário insere login e senha</p>
+<p>Sistema valida credenciais</p>
+<p>Sistema libera acesso</p>
+<hr />
+<h3 id="uc02-cadastrar-atividade-externa">UC02 – Cadastrar Atividade Externa<a class="headerlink" href="#uc02-cadastrar-atividade-externa" title="Permanent link">&para;</a></h3>
+<p>Ator: Aluno</p>
+<p>Fluxo:</p>
+<p>Aluno acessa área de atividades</p>
+<p>Preenche dados (tipo, carga horária, descrição)</p>
+<p>Anexa comprovante</p>
+<p>Envia solicitação</p>
+<p>Sistema salva como “pendente”</p>
+<hr />
+<h3 id="uc03-validar-atividade">UC03 – Validar Atividade<a class="headerlink" href="#uc03-validar-atividade" title="Permanent link">&para;</a></h3>
+<p>Ator: Administrador</p>
+<p>Fluxo:</p>
+<p>Admin acessa atividades pendentes</p>
+<p>Analisa comprovante</p>
+<p>Aprova ou rejeita</p>
+<p>Sistema atualiza status</p>
+<p>Sistema contabiliza horas (se aprovado)</p>
+<hr />
+<h3 id="uc04-consultar-horas">UC04 – Consultar Horas<a class="headerlink" href="#uc04-consultar-horas" title="Permanent link">&para;</a></h3>
+<p>Ator: Aluno</p>
+<p>Fluxo:</p>
+<p>Aluno acessa dashboard</p>
+<p>Sistema exibe:</p>
+<p>Total de horas</p>
+<p>Progresso</p>
+<p>Lista de atividades</p>
+<hr />
+<h3 id="uc05-cadastrar-atividade-interna">UC05 – Cadastrar Atividade Interna<a class="headerlink" href="#uc05-cadastrar-atividade-interna" title="Permanent link">&para;</a></h3>
+<p>Ator: Administrador</p>
+<p>Fluxo: Admin cria atividade</p>
+<p>Admin cria atividade</p>
+<p>Define carga horária</p>
+<p>Associa alunos participantes</p>
+<p>Sistema lança horas automaticamente</p>
 
 
 
