@@ -12,18 +12,20 @@ title: Levantamento de Requisitos
 ## **1. Identificação dos Stakeholders**
 
 - **Aluno:** Aluno irá entrar e cadastrar sua atividade
-- **Cordenação:** Irá avaliar e aprovar a atividade do aluno...
+- **Cordenação:** Irá avaliar e aprovar a atividade do aluno
 
 ---
 
 ### **2. Requisitos Funcionais**
 
-- **Cadastro de atividades externas**: O Sistema deve permitir que o aluno envie documentos para comprovar atividades fora da instituição. - **Cadastro de atividades internas**: O Sistema deve automaticamente identificar atividades internas.
+- **Cadastro de atividades externas**: O Sistema deve permitir que o aluno envie documentos para comprovar atividades fora da instituição. -
+- **Cadastro de atividades internas**: O Sistema deve automaticamente identificar atividades internas.
 - **Visualização de Horas** : O aluno deve ter acesso total à quantidade de horas registradas no total em atividades externas e internas.
 - **Classificar atividades por tipo**: O Sistema deve categorizar as atividade em diferentes eixos (curso, palestra, evento, etc.)
 - **Fazer login de alunos e coordenação** O sistema deve permitir o login de usuários
 - **Visualização de atividades cadastradas**: O Aluno deve ter acesso total à visualização das atividades registradas
--
+
+---
 
 ### **3. Requisitos Não Funcionais**
 
@@ -36,62 +38,80 @@ title: Levantamento de Requisitos
 
 ### **4. Exemplo de Caso de Uso** (Exemplo)
 
-UC01 – Realizar Login
+#### UC01 – Realizar Login
 
 Ator: Aluno/Admin
+
 Descrição: Permite acesso ao sistema
 
 Fluxo:
 
 Usuário insere login e senha
+
 Sistema valida credenciais
+
 Sistema libera acesso
 
-UC02 – Cadastrar Atividade Externa
+#### UC02 – Cadastrar Atividade Externa
 
 Ator: Aluno
 
 Fluxo:
 
 Aluno acessa área de atividades
+
 Preenche dados (tipo, carga horária, descrição)
+
 Anexa comprovante
+
 Envia solicitação
+
 Sistema salva como “pendente”
 
-UC03 – Validar Atividade
+#### UC03 – Validar Atividade
 
 Ator: Administrador
 
 Fluxo:
 
 Admin acessa atividades pendentes
+
 Analisa comprovante
+
 Aprova ou rejeita
+
 Sistema atualiza status
+
 Sistema contabiliza horas (se aprovado)
 
-UC04 – Consultar Horas
+#### UC04 – Consultar Horas
 
 Ator: Aluno
 
 Fluxo:
 
 Aluno acessa dashboard
+
 Sistema exibe:
+
 Total de horas
+
 Progresso
+
 Lista de atividades
 
-UC05 – Cadastrar Atividade Interna
+#### UC05 – Cadastrar Atividade Interna
 
 Ator: Administrador
 
 Fluxo: Admin cria atividade
 
 Admin cria atividade
+
 Define carga horária
+
 Associa alunos participantes
+
 Sistema lança horas automaticamente
 
 ---

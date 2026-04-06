@@ -5,83 +5,86 @@ title: Diagrama de Casos de Uso
 
 ## Casos de Uso
 
-### Descrição:
+### UC01 – Realizar Login
 
-- Contas
-	- Criação
-	- Entrada
-	- Alteração
-	- Recuperar Senha
-	- Exclusão Lógica
-	- Visualização
+Ator: Aluno/Admin
 
-- Perfis
-	- Edição
-	- Pesquisar
-	- Visualização
-	- Seguir/Deixar de Seguir
+Descrição: Permite acesso ao sistema
 
-- Postagens (Público) 	 	
-	- Criação
-	- Exclusão
-	- Interação
-	- Visualização
+Fluxo:
 
-- Mensagens (Privado)
-	- Criação
-	- Exclusão
-	- Visualização
+Usuário insere login e senha
 
-- Galerias
-	- Albuns
-- Blogs
-- Grupos
+Sistema valida credenciais
 
-### Criação de uma conta no sistema
+Sistema libera acesso
 
-* Atores:
+---
 
-	- Usuário
-	- Sistema
+### UC02 – Cadastrar Atividade Externa
 
-- Pré-Condições:
-	- Nenhuma
+Ator: Aluno
 
-* Fluxo Básico:
-    1. Usuário fornece e-mail, senha e confirmações
-    2. Dados do Usuário são validados pelo Sistema
-    3. Dados do Usuário são encriptados pelo Sistema
-    4. Dados do Usuário são persistidos pelo Sistema
-    5. Sistema gera um link com prazo de expiração
-    6. Sistema envia e-mail de verificação, com o link, para o Usuário
-    7. Usuário confirma o e-mail antes do link expirar
-    8. Sistema confirma que o Cadastro do Usuário foi realizado com sucesso
-    9. Sistema redireciona o Usuário para a página de Entrada
+Fluxo:
 
-- Fluxos Alternativos:
-	- 2a. E-mail do Usuário é inválido
-		2a1. Sistema exibe mensagem de erro
-	- 2b. Senha do Usuário não respeita regras de segurança
-		- 2b1. Sistema exibe mensagem de erro
-	- 3a. Usuário tenta confirmar o e-mail depois de o link expirar
-		- 3a1. Sistema sugere que o Usuário realize um novo Cadastro
+Aluno acessa área de atividades
 
-### Entrada do usuário no sistema
+Preenche dados (tipo, carga horária, descrição)
 
-- Atores:
-	- Usuário
-	- Sistema
+Anexa comprovante
 
-- Pré-Condições:
-	Usuário deve estar cadastrado
+Envia solicitação
 
-- Fluxo Básico:
-    - 1. Usuário fornece e-mail e senha
-	- 2. Sistema autentica o Usuário
-	- 3. Sistema redireciona o Usuário para a página inicial
+Sistema salva como “pendente”
 
-- Fluxos Alternativos:
-	- 2a. Dados do Usuário Inválidos
-		- 2a1. Sistema exibe mensagem de erro
-	- 3a. Primeio acesso do Usuário
-		- 3a1. Sistema redireciona o Usuário para a página de edição de perfil
+---
+
+### UC03 – Validar Atividade
+
+Ator: Administrador
+
+Fluxo:
+
+Admin acessa atividades pendentes
+
+Analisa comprovante
+
+Aprova ou rejeita
+
+Sistema atualiza status
+
+Sistema contabiliza horas (se aprovado)
+
+---
+
+### UC04 – Consultar Horas
+
+Ator: Aluno
+
+Fluxo:
+
+Aluno acessa dashboard
+
+Sistema exibe:
+
+Total de horas
+
+Progresso
+
+Lista de atividades
+
+---
+
+### UC05 – Cadastrar Atividade Interna
+
+Ator: Administrador
+
+Fluxo: Admin cria atividade
+
+Admin cria atividade
+
+Define carga horária
+
+Associa alunos participantes
+
+Sistema lança horas automaticamente
