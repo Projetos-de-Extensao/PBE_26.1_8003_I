@@ -83,7 +83,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#diagrama-de-classe-a-1km-de-distancia" class="md-skip">
+        <a href="#diagrama-de-classes" class="md-skip">
           Skip to content
         </a>
       
@@ -734,9 +734,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#diagrama-de-classe-a-1km-de-distancia" class="md-nav__link">
+  <a href="#diagrama-de-classes" class="md-nav__link">
     <span class="md-ellipsis">
-      Diagrama de Classe a 1km de distância
+      Diagrama de Classes
     </span>
   </a>
   
@@ -1010,28 +1010,8 @@
 
   <h1>Diagrama de Classes</h1>
 
-<h2 id="diagrama-de-classe-a-1km-de-distancia">Diagrama de Classe a 1km de distância<a class="headerlink" href="#diagrama-de-classe-a-1km-de-distancia" title="Permanent link">&para;</a></h2>
-<p>@startuml
-skinparam monochrome true
-skinparam shadowing false
-skinparam packageStyle rectangle</p>
-<p>title Visão Conceitual do Banco de Dados (AAC IBMEC)</p>
-<p>rectangle "Gestão de Usuários" {
-    entity Aluno
-    entity Coordenação
-}</p>
-<p>rectangle "Regras e Normativas" {
-    entity EixoTematico
-    entity TipoAtividade
-}</p>
-<p>rectangle "Operacional" {
-    entity AtividadeComplementar
-}</p>
-<p>Aluno "1" -- "" AtividadeComplementar : submete &gt;
-EixoTematico "1" -- "" TipoAtividade : agrupa &gt;
-TipoAtividade "1" -- "" AtividadeComplementar : define limites para &gt;
-AtividadeComplementar "" -- "1" Coordenação : é analisada por &gt;</p>
-<p>@enduml</p>
+<h2 id="diagrama-de-classes">Diagrama de Classes<a class="headerlink" href="#diagrama-de-classes" title="Permanent link">&para;</a></h2>
+<p><a href="../../assets/diagrama_de_classes.png"><img alt="Diagrama de Classes" src="../../assets/diagrama_de_classes.png" /></a></p>
 
 
 
