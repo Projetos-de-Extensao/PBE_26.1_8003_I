@@ -13,17 +13,21 @@ title: Levantamento de Requisitos
 
 - **Aluno:** Aluno irá entrar e cadastrar sua atividade
 - **Cordenação:** Irá avaliar e aprovar a atividade do aluno
+- **Organização Acadêmica:** Junto com a coordenação, também é responsável por cadastrar atividades internas
 
 ---
 
 ### **2. Requisitos Funcionais**
 
-- **Cadastro de atividades externas**: O Sistema deve permitir que o aluno envie documentos para comprovar atividades fora da instituição. -
-- **Cadastro de atividades internas**: O Sistema deve automaticamente identificar atividades internas.
-- **Visualização de Horas** : O aluno deve ter acesso total à quantidade de horas registradas no total em atividades externas e internas.
-- **Classificar atividades por tipo**: O Sistema deve categorizar as atividade em diferentes eixos (curso, palestra, evento, etc.)
-- **Fazer login de alunos e coordenação** O sistema deve permitir o login de usuários
-- **Visualização de atividades cadastradas**: O Aluno deve ter acesso total à visualização das atividades registradas
+- **Autenticação**: O sistema deve permitir login de usuários (Aluno, Coordenação, Organização Acadêmica).
+- **Cadastro de atividade externa**: O sistema deve permitir ao aluno cadastrar atividades externas.
+- **Anexo de comprovantes**: O sistema deve permitir ao aluno anexar comprovantes (PDF/imagem).
+- **Visualizar atividades cadastradas**: O sistema deve permitir ao aluno visualizar atividades cadastradas.
+- **Visualizar total de horas**: O sistema deve permitir ao aluno visualizar o total de horas acumuladas.
+- **Visualizar progresso**: O sistema deve permitir ao aluno visualizar o progresso para obter todas as horas necessárias.
+- **Validação de atividade externa**: O sistema deve permitir a coordenação validar ou rejeitar atividades externas.
+- **Cadastro de atividade interna**: O sistema deve permitir a coordenação ou organização acadêmica cadastrar atividades internas.
+- **Lançamento de horas**: O sistema deve lançar automaticamente as horas aos alunos participantes.
 
 ---
 
@@ -40,7 +44,7 @@ title: Levantamento de Requisitos
 
 #### UC01 – Realizar Login
 
-Ator: Aluno/Admin
+Ator: Aluno/Coordenação/Organização Acadêmica
 
 Descrição: Permite acesso ao sistema
 
@@ -68,9 +72,9 @@ Envia solicitação
 
 Sistema salva como “pendente”
 
-#### UC03 – Validar Atividade
+#### UC03 – Validar Atividade Externa
 
-Ator: Administrador
+Ator: Coordenação
 
 Fluxo:
 
@@ -102,7 +106,7 @@ Lista de atividades
 
 #### UC05 – Cadastrar Atividade Interna
 
-Ator: Administrador
+Ator: Coordenação/Organização Acadêmica
 
 Fluxo: Admin cria atividade
 
@@ -116,33 +120,8 @@ Sistema lança horas automaticamente
 
 ---
 
-### Diagrama de Casos de Uso (Exemplo)
+### Diagrama de Casos de Uso
 
-Aqui está o diagrama de **Caso de Uso (UML)** para o cenário de **"Cadastro de atividades externas"**, usando **PlantUML**:
+Aqui está o diagrama de **Caso de Uso (UML)**:
 
-### **Código PlantUML**:
-
-@startuml Cadastro_Externo
-left to right direction
-
-actor "Aluno" as Aluno
-entity "Sistema" as Sistema
-
-rectangle "Sistema de Horas Complementares" {
-usecase "UC02 - Cadastrar Atividade Externa" as UC02
-}
-
-Aluno --> UC02
-
-note right of UC02
-**Fluxo Principal:**
-
-1. Aluno acessa área de atividades
-2. Preenche dados (tipo, carga horária, descrição)
-3. Anexa comprovante (PDF/Imagem)
-4. Envia solicitação
-5. Sistema valida e salva como "Pendente"
-   end note
-
-UC02 ..> Sistema : <<persistir dados>>
-@enduml
+[![Casos de Uso](../assets/Casos_de_Uso/Casos_de_uso.png)](../assets/Casos_de_Uso/Casos_de_uso.png)

@@ -5,9 +5,9 @@ title: Diagrama de Casos de Uso
 
 ## Casos de Uso
 
-### UC01 – Realizar Login
+#### UC01 – Realizar Login
 
-Ator: Aluno/Admin
+Ator: Aluno/Coordenação/Organização Acadêmica
 
 Descrição: Permite acesso ao sistema
 
@@ -19,9 +19,7 @@ Sistema valida credenciais
 
 Sistema libera acesso
 
----
-
-### UC02 – Cadastrar Atividade Externa
+#### UC02 – Cadastrar Atividade Externa
 
 Ator: Aluno
 
@@ -37,11 +35,9 @@ Envia solicitação
 
 Sistema salva como “pendente”
 
----
+#### UC03 – Validar Atividade Externa
 
-### UC03 – Validar Atividade
-
-Ator: Administrador
+Ator: Coordenação
 
 Fluxo:
 
@@ -55,9 +51,7 @@ Sistema atualiza status
 
 Sistema contabiliza horas (se aprovado)
 
----
-
-### UC04 – Consultar Horas
+#### UC04 – Consultar Horas
 
 Ator: Aluno
 
@@ -73,11 +67,9 @@ Progresso
 
 Lista de atividades
 
----
+#### UC05 – Cadastrar Atividade Interna
 
-### UC05 – Cadastrar Atividade Interna
-
-Ator: Administrador
+Ator: Coordenação/Organização Acadêmica
 
 Fluxo: Admin cria atividade
 
@@ -88,3 +80,11 @@ Define carga horária
 Associa alunos participantes
 
 Sistema lança horas automaticamente
+
+---
+
+### Diagrama de Casos de Uso
+
+Aqui está o diagrama de **Caso de Uso (UML)**:
+
+[![Casos de Uso](../assets/Casos_de_Uso/Casos_de_uso.png)](../assets/Casos_de_Uso/Casos_de_uso.png)

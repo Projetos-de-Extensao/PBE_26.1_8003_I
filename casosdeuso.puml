@@ -1,0 +1,75 @@
+@startuml Casos_de_uso
+left to right direction
+skinparam packageStyle rectangle
+
+' ===== Atores =====
+actor Usuario
+actor Aluno
+actor Coordenacao
+actor "Organização Acadêmica" as Org
+
+Usuario <|-- Aluno
+Usuario <|-- Coordenacao
+Usuario <|-- Org
+
+' ===== Sistema =====
+rectangle "Sistema de Horas Complementares (AAC)" {
+
+    ' Casos principais
+    usecase "UC01 - Realizar Login" as UC01
+    usecase "UC02 - Cadastrar Atividade Externa" as UC02
+    usecase "UC03 - Validar Atividade Externa" as UC03
+    usecase "UC04 - Consultar Horas" as UC04
+    usecase "UC05 - Cadastrar Atividade Interna" as UC05
+
+    ' Subprocessos (opcional, mas deixa mais profissional)
+    usecase "Preencher Dados" as UC021
+    usecase "Anexar Comprovante" as UC022
+    usecase "Enviar Solicitação" as UC023
+    usecase "Salvar como Pendente" as UC024
+
+    usecase "Analisar Comprovante" as UC031
+    usecase "Aprovar/Rejeitar" as UC032
+    usecase "Atualizar Status" as UC033
+    usecase "Contabilizar Horas" as UC034
+
+    usecase "Visualizar Progresso" as UC041
+    usecase "Visualizar Atividades" as UC042
+
+    usecase "Definir Dados da Atividade" as UC051
+    usecase "Associar Alunos" as UC052
+    usecase "Lançar Horas" as UC053
+}
+
+' ===== Relacionamentos =====
+
+Usuario --> UC01
+
+Aluno --> UC02
+Aluno --> UC04
+
+Coordenacao --> UC03
+Coordenacao --> UC05
+
+Org --> UC05
+
+' ===== Includes (fluxos internos) =====
+
+UC02 --> UC021 : <<include>>
+UC02 --> UC022 : <<include>>
+UC02 --> UC023 : <<include>>
+UC023 --> UC024 : <<include>>
+
+UC03 --> UC031 : <<include>>
+UC03 --> UC032 : <<include>>
+UC03 --> UC033 : <<include>>
+UC03 --> UC034 : <<include>>
+
+UC04 --> UC041 : <<include>>
+UC04 --> UC042 : <<include>>
+
+UC05 --> UC051 : <<include>>
+UC05 --> UC052 : <<include>>
+UC05 --> UC053 : <<include>>
+
+@enduml
