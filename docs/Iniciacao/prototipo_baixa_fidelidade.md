@@ -2,6 +2,7 @@
 id: prototipobaixa
 title: Protótipo Baixa Fidelidade
 ---
+
 ## Introdução
 
 <p align = "justify">
@@ -20,54 +21,20 @@ Iniciamos o projeto através dos levantamentos iniciais da equipe, após discuss
 
 # Tela de login
 
-@startsalt
-{+
-  == Login - Sistema AAC IBMEC
-  .
-  Usuário (E-mail): | "exemplo@ibmec.edu.br  "
-  Senha:            | "******* "
-  .
-  [  Entrar  ] | [ Esqueci a Senha ]
-}
-@endsalt
-
+[![Login](../assets/Prototipo/login.png)](../assets/Prototipo/login.png)
 
 # Dashboard do aluno
 
-@startsalt
-{+
-  == Dashboard: João Silva (Matrícula: 20240123)
-  .
-  {T
-    Eixo Temático | Horas Obtidas | Mínimo Exigido | Status
-    Ensino        | 40h           | 60h            | Em progresso
-    Pesquisa      | 20h           | 40h            | Em progresso
-    Extensão      | 50h           | 50h            | Concluído
-    --            | --            | --             | --
-    **Total** | **110h** | **150h** | **73%**
-  }
-  .
-  [ + Cadastrar Nova Atividade ] | [ Gerar Relatório PDF ]
-}
-@endsalt
+[![Dashboard_Aluno](../assets/Prototipo/dashboard_aluno.png)](../assets/Prototipo/dashboard_aluno.png)
 
 # Cadastro de atividades externas
 
-@startsalt
-{+
-  == UC02 - Cadastrar Atividade Externa
-  .
-  Tipo de Atividade: | ^Cursos Livres / Idiomas^
-  Carga Horária:     | "20 " (Horas)
-  Data de Conclusão: | "10/04/2026"
-  .
-  Descrição da Atividade:
-  {
-    "Certificado de curso de Python Avançado realizado na plataforma Udemy."
-  }
-  .
-  Comprovante (PDF/Imagem): | [ Selecionar Arquivo... ]
-  .
-  [  Cancelar  ] | [ Enviar para Validação ]
-}
-@endsalt
+[![Cadastro_Atividade_Externa](../assets/Prototipo/cadastro_externo.png)](../assets/Prototipo/cadastro_externo.png)
+
+# Validação de atividades externas
+
+[![Validar_Atividade_Externa](../assets/Prototipo/validar_atividade.png)](../assets/Prototipo/validar_atividade.png)
+
+# Cadastro de atividades internas
+
+[![Cadastro_Atividade_Interna](../assets/Prototipo/cadastro_interno.png)](../assets/Prototipo/cadastro_interno.png)

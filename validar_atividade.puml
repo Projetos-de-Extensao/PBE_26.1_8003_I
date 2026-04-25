@@ -1,0 +1,13 @@
+@startsalt validar_atividade
+{+
+  == UC03 - Validar Atividades Pendentes
+  --
+  {T
+    Aluno | Data | Atividade | Comprovante | Ação
+    João Silva | 10/04 | Curso Python | [ Visualizar ] | [ Aprovar ] [ Rejeitar ]
+    Maria Ana  | 09/04 | Workshop IA  | [ Visualizar ] | [ Aprovar ] [ Rejeitar ]
+  }
+  --
+  [ Sair ]
+}
+@endsalt
