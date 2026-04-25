@@ -1,0 +1,96 @@
+@startuml diagrama_de_classes
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+skinparam shadowing false
+
+package "Gestão de Usuários" {
+    abstract class Usuario {
+        - id: Integer
+        - nome: String
+        - email: String
+        - senha_hash: String
+        - perfil: EnumPerfil
+        + realizarLogin()
+    }
+
+    class Aluno {
+        - matricula: String
+        - curso: String
+        - semestre_ingresso: Integer
+        - total_horas_integralizadas: Integer
+        + consultarProgresso()
+    }
+
+    class Coordenador {
+        - sia_funcionario: String
+        + validarAtividade(id: Integer, status: EnumStatus)
+        + cadastrarAtividadeInterna()
+    }
+
+    class OrgAcademica {
+        - nome_entidade: String
+        - cargo_representante: String
+        + cadastrarAtividadeInterna()
+    }
+}
+
+package "Regras de Negócio (IBMEC)" {
+    class EixoTematico {
+        - id: Integer
+        - nome: String
+    }
+
+    class TipoAtividade {
+        - id: Integer
+        - nome: String
+        - limite_horas_total: Integer
+        - limite_horas_por_evento: Integer
+    }
+}
+
+package "Atividades e Processamento" {
+    class AtividadeComplementar {
+        - id: Integer
+        - descricao: Text
+        - carga_horaria_solicitada: Integer
+        - carga_horaria_validada: Integer
+        - status: EnumStatus
+        - tipo_origem: EnumOrigem
+        - caminho_comprovante: String
+    }
+
+    class Validacao {
+        - id: Integer
+        - data_analise: DateTime
+        - justificativa: Text
+    }
+}
+
+' Relacionamentos
+Usuario <|-- Aluno
+Usuario <|-- Coordenador
+Usuario <|-- OrgAcademica
+
+Aluno "1" -- "*" AtividadeComplementar : solicita >
+EixoTematico "1" -- "*" TipoAtividade : agrupa >
+TipoAtividade "1" -- "*" AtividadeComplementar : define regras para >
+
+AtividadeComplementar "1" -- "0..1" Validacao : recebe >
+Coordenador "1" -- "*" Validacao : realiza >
+
+' Novos relacionamentos de cadastro (UC05)
+Coordenador "1" -- "*" AtividadeComplementar : cadastra >
+OrgAcademica "1" -- "*" AtividadeComplementar : cadastra >
+
+enum EnumStatus {
+    PENDENTE
+    VALIDADO
+    REJEITADO
+}
+
+enum EnumOrigem {
+    INTERNA
+    EXTERNA
+}
+
+@enduml
