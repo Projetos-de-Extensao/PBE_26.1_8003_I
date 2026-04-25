@@ -752,9 +752,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#uc03-validar-atividade" class="md-nav__link">
+  <a href="#uc03-validar-atividade-externa" class="md-nav__link">
     <span class="md-ellipsis">
-      UC03 – Validar Atividade
+      UC03 – Validar Atividade Externa
     </span>
   </a>
   
@@ -784,18 +784,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#diagrama-de-casos-de-uso-exemplo" class="md-nav__link">
+  <a href="#diagrama-de-casos-de-uso" class="md-nav__link">
     <span class="md-ellipsis">
-      Diagrama de Casos de Uso (Exemplo)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#codigo-plantuml" class="md-nav__link">
-    <span class="md-ellipsis">
-      Código PlantUML:
+      Diagrama de Casos de Uso
     </span>
   </a>
   
@@ -1121,16 +1112,20 @@
 <ul>
 <li><strong>Aluno:</strong> Aluno irá entrar e cadastrar sua atividade</li>
 <li><strong>Cordenação:</strong> Irá avaliar e aprovar a atividade do aluno</li>
+<li><strong>Organização Acadêmica:</strong> Junto com a coordenação, também é responsável por cadastrar atividades internas</li>
 </ul>
 <hr />
 <h3 id="2-requisitos-funcionais"><strong>2. Requisitos Funcionais</strong><a class="headerlink" href="#2-requisitos-funcionais" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Cadastro de atividades externas</strong>: O Sistema deve permitir que o aluno envie documentos para comprovar atividades fora da instituição. -</li>
-<li><strong>Cadastro de atividades internas</strong>: O Sistema deve automaticamente identificar atividades internas.</li>
-<li><strong>Visualização de Horas</strong> : O aluno deve ter acesso total à quantidade de horas registradas no total em atividades externas e internas.</li>
-<li><strong>Classificar atividades por tipo</strong>: O Sistema deve categorizar as atividade em diferentes eixos (curso, palestra, evento, etc.)</li>
-<li><strong>Fazer login de alunos e coordenação</strong> O sistema deve permitir o login de usuários</li>
-<li><strong>Visualização de atividades cadastradas</strong>: O Aluno deve ter acesso total à visualização das atividades registradas</li>
+<li><strong>Autenticação</strong>: O sistema deve permitir login de usuários (Aluno, Coordenação, Organização Acadêmica).</li>
+<li><strong>Cadastro de atividade externa</strong>: O sistema deve permitir ao aluno cadastrar atividades externas.</li>
+<li><strong>Anexo de comprovantes</strong>: O sistema deve permitir ao aluno anexar comprovantes (PDF/imagem).</li>
+<li><strong>Visualizar atividades cadastradas</strong>: O sistema deve permitir ao aluno visualizar atividades cadastradas.</li>
+<li><strong>Visualizar total de horas</strong>: O sistema deve permitir ao aluno visualizar o total de horas acumuladas.</li>
+<li><strong>Visualizar progresso</strong>: O sistema deve permitir ao aluno visualizar o progresso para obter todas as horas necessárias.</li>
+<li><strong>Validação de atividade externa</strong>: O sistema deve permitir a coordenação validar ou rejeitar atividades externas.</li>
+<li><strong>Cadastro de atividade interna</strong>: O sistema deve permitir a coordenação ou organização acadêmica cadastrar atividades internas.</li>
+<li><strong>Lançamento de horas</strong>: O sistema deve lançar automaticamente as horas aos alunos participantes.</li>
 </ul>
 <hr />
 <h3 id="3-requisitos-nao-funcionais"><strong>3. Requisitos Não Funcionais</strong><a class="headerlink" href="#3-requisitos-nao-funcionais" title="Permanent link">&para;</a></h3>
@@ -1143,7 +1138,7 @@
 <hr />
 <h3 id="4-exemplo-de-caso-de-uso-exemplo"><strong>4. Exemplo de Caso de Uso</strong> (Exemplo)<a class="headerlink" href="#4-exemplo-de-caso-de-uso-exemplo" title="Permanent link">&para;</a></h3>
 <h4 id="uc01-realizar-login">UC01 – Realizar Login<a class="headerlink" href="#uc01-realizar-login" title="Permanent link">&para;</a></h4>
-<p>Ator: Aluno/Admin</p>
+<p>Ator: Aluno/Coordenação/Organização Acadêmica</p>
 <p>Descrição: Permite acesso ao sistema</p>
 <p>Fluxo:</p>
 <p>Usuário insere login e senha</p>
@@ -1157,8 +1152,8 @@
 <p>Anexa comprovante</p>
 <p>Envia solicitação</p>
 <p>Sistema salva como “pendente”</p>
-<h4 id="uc03-validar-atividade">UC03 – Validar Atividade<a class="headerlink" href="#uc03-validar-atividade" title="Permanent link">&para;</a></h4>
-<p>Ator: Administrador</p>
+<h4 id="uc03-validar-atividade-externa">UC03 – Validar Atividade Externa<a class="headerlink" href="#uc03-validar-atividade-externa" title="Permanent link">&para;</a></h4>
+<p>Ator: Coordenação</p>
 <p>Fluxo:</p>
 <p>Admin acessa atividades pendentes</p>
 <p>Analisa comprovante</p>
@@ -1174,36 +1169,16 @@
 <p>Progresso</p>
 <p>Lista de atividades</p>
 <h4 id="uc05-cadastrar-atividade-interna">UC05 – Cadastrar Atividade Interna<a class="headerlink" href="#uc05-cadastrar-atividade-interna" title="Permanent link">&para;</a></h4>
-<p>Ator: Administrador</p>
+<p>Ator: Coordenação/Organização Acadêmica</p>
 <p>Fluxo: Admin cria atividade</p>
 <p>Admin cria atividade</p>
 <p>Define carga horária</p>
 <p>Associa alunos participantes</p>
 <p>Sistema lança horas automaticamente</p>
 <hr />
-<h3 id="diagrama-de-casos-de-uso-exemplo">Diagrama de Casos de Uso (Exemplo)<a class="headerlink" href="#diagrama-de-casos-de-uso-exemplo" title="Permanent link">&para;</a></h3>
-<p>Aqui está o diagrama de <strong>Caso de Uso (UML)</strong> para o cenário de <strong>"Cadastro de atividades externas"</strong>, usando <strong>PlantUML</strong>:</p>
-<h3 id="codigo-plantuml"><strong>Código PlantUML</strong>:<a class="headerlink" href="#codigo-plantuml" title="Permanent link">&para;</a></h3>
-<p>@startuml Cadastro_Externo
-left to right direction</p>
-<p>actor "Aluno" as Aluno
-entity "Sistema" as Sistema</p>
-<p>rectangle "Sistema de Horas Complementares" {
-usecase "UC02 - Cadastrar Atividade Externa" as UC02
-}</p>
-<p>Aluno --&gt; UC02</p>
-<p>note right of UC02
-<strong>Fluxo Principal:</strong></p>
-<ol>
-<li>Aluno acessa área de atividades</li>
-<li>Preenche dados (tipo, carga horária, descrição)</li>
-<li>Anexa comprovante (PDF/Imagem)</li>
-<li>Envia solicitação</li>
-<li>Sistema valida e salva como "Pendente"
-   end note</li>
-</ol>
-<p>UC02 ..&gt; Sistema : &lt;<persistir dados>&gt;
-@enduml</p>
+<h3 id="diagrama-de-casos-de-uso">Diagrama de Casos de Uso<a class="headerlink" href="#diagrama-de-casos-de-uso" title="Permanent link">&para;</a></h3>
+<p>Aqui está o diagrama de <strong>Caso de Uso (UML)</strong>:</p>
+<p><a href="../../assets/Casos_de_Uso/Casos_de_uso.png"><img alt="Casos de Uso" src="../../assets/Casos_de_Uso/Casos_de_uso.png" /></a></p>
 
 
 

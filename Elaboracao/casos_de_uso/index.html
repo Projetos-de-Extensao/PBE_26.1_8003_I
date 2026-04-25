@@ -741,9 +741,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#uc03-validar-atividade" class="md-nav__link">
+  <a href="#uc03-validar-atividade-externa" class="md-nav__link">
     <span class="md-ellipsis">
-      UC03 – Validar Atividade
+      UC03 – Validar Atividade Externa
     </span>
   </a>
   
@@ -762,6 +762,15 @@
   <a href="#uc05-cadastrar-atividade-interna" class="md-nav__link">
     <span class="md-ellipsis">
       UC05 – Cadastrar Atividade Interna
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diagrama-de-casos-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagrama de Casos de Uso
     </span>
   </a>
   
@@ -1062,15 +1071,14 @@
   <h1>Casos de Uso</h1>
 
 <h2 id="casos-de-uso">Casos de Uso<a class="headerlink" href="#casos-de-uso" title="Permanent link">&para;</a></h2>
-<h3 id="uc01-realizar-login">UC01 – Realizar Login<a class="headerlink" href="#uc01-realizar-login" title="Permanent link">&para;</a></h3>
-<p>Ator: Aluno/Admin</p>
+<h4 id="uc01-realizar-login">UC01 – Realizar Login<a class="headerlink" href="#uc01-realizar-login" title="Permanent link">&para;</a></h4>
+<p>Ator: Aluno/Coordenação/Organização Acadêmica</p>
 <p>Descrição: Permite acesso ao sistema</p>
 <p>Fluxo:</p>
 <p>Usuário insere login e senha</p>
 <p>Sistema valida credenciais</p>
 <p>Sistema libera acesso</p>
-<hr />
-<h3 id="uc02-cadastrar-atividade-externa">UC02 – Cadastrar Atividade Externa<a class="headerlink" href="#uc02-cadastrar-atividade-externa" title="Permanent link">&para;</a></h3>
+<h4 id="uc02-cadastrar-atividade-externa">UC02 – Cadastrar Atividade Externa<a class="headerlink" href="#uc02-cadastrar-atividade-externa" title="Permanent link">&para;</a></h4>
 <p>Ator: Aluno</p>
 <p>Fluxo:</p>
 <p>Aluno acessa área de atividades</p>
@@ -1078,17 +1086,15 @@
 <p>Anexa comprovante</p>
 <p>Envia solicitação</p>
 <p>Sistema salva como “pendente”</p>
-<hr />
-<h3 id="uc03-validar-atividade">UC03 – Validar Atividade<a class="headerlink" href="#uc03-validar-atividade" title="Permanent link">&para;</a></h3>
-<p>Ator: Administrador</p>
+<h4 id="uc03-validar-atividade-externa">UC03 – Validar Atividade Externa<a class="headerlink" href="#uc03-validar-atividade-externa" title="Permanent link">&para;</a></h4>
+<p>Ator: Coordenação</p>
 <p>Fluxo:</p>
 <p>Admin acessa atividades pendentes</p>
 <p>Analisa comprovante</p>
 <p>Aprova ou rejeita</p>
 <p>Sistema atualiza status</p>
 <p>Sistema contabiliza horas (se aprovado)</p>
-<hr />
-<h3 id="uc04-consultar-horas">UC04 – Consultar Horas<a class="headerlink" href="#uc04-consultar-horas" title="Permanent link">&para;</a></h3>
+<h4 id="uc04-consultar-horas">UC04 – Consultar Horas<a class="headerlink" href="#uc04-consultar-horas" title="Permanent link">&para;</a></h4>
 <p>Ator: Aluno</p>
 <p>Fluxo:</p>
 <p>Aluno acessa dashboard</p>
@@ -1096,14 +1102,17 @@
 <p>Total de horas</p>
 <p>Progresso</p>
 <p>Lista de atividades</p>
-<hr />
-<h3 id="uc05-cadastrar-atividade-interna">UC05 – Cadastrar Atividade Interna<a class="headerlink" href="#uc05-cadastrar-atividade-interna" title="Permanent link">&para;</a></h3>
-<p>Ator: Administrador</p>
+<h4 id="uc05-cadastrar-atividade-interna">UC05 – Cadastrar Atividade Interna<a class="headerlink" href="#uc05-cadastrar-atividade-interna" title="Permanent link">&para;</a></h4>
+<p>Ator: Coordenação/Organização Acadêmica</p>
 <p>Fluxo: Admin cria atividade</p>
 <p>Admin cria atividade</p>
 <p>Define carga horária</p>
 <p>Associa alunos participantes</p>
 <p>Sistema lança horas automaticamente</p>
+<hr />
+<h3 id="diagrama-de-casos-de-uso">Diagrama de Casos de Uso<a class="headerlink" href="#diagrama-de-casos-de-uso" title="Permanent link">&para;</a></h3>
+<p>Aqui está o diagrama de <strong>Caso de Uso (UML)</strong>:</p>
+<p><a href="../../assets/Casos_de_Uso/Casos_de_uso.png"><img alt="Casos de Uso" src="../../assets/Casos_de_Uso/Casos_de_uso.png" /></a></p>
 
 
 
