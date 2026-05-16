@@ -28,7 +28,7 @@ class AlunoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Aluno
-        fields = 'all'
+        fields = '__all__'
 
 class CoordenadorSerializer(serializers.ModelSerializer):
 
@@ -36,7 +36,7 @@ class CoordenadorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Coordenador
-        fields = 'all'
+        fields = '__all__'
 
 class OrgAcademicaSerializer(serializers.ModelSerializer):
 
@@ -44,13 +44,13 @@ class OrgAcademicaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OrgAcademica
-        fields = 'all'
+        fields = '__all__'
 
 class EixoTematicoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = EixoTematico
-        fields = 'all'
+        fields = '__all__'
 
 class TipoAtividadeSerializer(serializers.ModelSerializer):
 
@@ -58,7 +58,7 @@ class TipoAtividadeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TipoAtividade
-        fields = 'all'
+        fields = '__all__'
 
 class AtividadeComplementarSerializer(serializers.ModelSerializer):
 
@@ -72,7 +72,7 @@ class AtividadeComplementarSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AtividadeComplementar
-        fields = 'all'
+        fields = '__all__'
 
 class ValidacaoSerializer(serializers.ModelSerializer):
 
@@ -80,4 +80,4 @@ class ValidacaoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Validacao
-        fields = 'all'
+        fields = '__all__'
