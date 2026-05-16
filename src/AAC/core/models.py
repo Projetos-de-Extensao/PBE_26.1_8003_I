@@ -30,7 +30,7 @@ class Aluno(models.Model):
 
     total_horas_integralizadas = models.IntegerField(default=0)
 
-    def str(self):
+    def __str__(self):
         return self.usuario.username
 
 class Coordenador(models.Model):
@@ -42,7 +42,7 @@ class Coordenador(models.Model):
 
     sia_funcionario = models.CharField(max_length=20)
 
-    def str(self):
+    def __str__(self):
         return self.usuario.username
     
 class OrgAcademica(models.Model):
@@ -56,14 +56,16 @@ class OrgAcademica(models.Model):
 
     cargo_representante = models.CharField(max_length=100)
 
-    def str(self):
+    def __str__(self):
         return self.nome_entidade
+    
 class EixoTematico(models.Model):
 
     nome = models.CharField(max_length=100)
 
-    def str(self):
+    def __str__(self):
         return self.nome
+    
 class TipoAtividade(models.Model):
 
     nome = models.CharField(max_length=100)
@@ -80,6 +82,7 @@ class TipoAtividade(models.Model):
 
     def __str__(self):
         return self.nome
+    
 class AtividadeComplementar(models.Model):
 
     class Status(models.TextChoices):
@@ -140,8 +143,9 @@ class AtividadeComplementar(models.Model):
         on_delete=models.CASCADE
     )
 
-    def str(self):
+    def __str__(self):
         return self.descricao
+    
 class Validacao(models.Model):
 
     atividade = models.OneToOneField(
@@ -153,5 +157,5 @@ class Validacao(models.Model):
 
     justificativa = models.TextField()
 
-    def str(self):
+    def __str__(self):
         return f'Validação #{self.id}'                    

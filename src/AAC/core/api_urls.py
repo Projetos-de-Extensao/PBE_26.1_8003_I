@@ -14,6 +14,7 @@ from .api import (
 )
 
 router = DefaultRouter()
+
 router.register(r'usuarios', UsuarioViewSet)
 
 router.register(r'alunos', AlunoViewSet)
