@@ -1,7 +1,21 @@
+#streaming_platform/urls.py
 from django.contrib import admin
 from django.urls import path, include
+from drf_spectacular.views import (
+   SpectacularAPIView,
+   SpectacularSwaggerView,
+   SpectacularRedocView,
+)
 
 urlpatterns = [
+    # Suas outras URLs
     path('admin/', admin.site.urls),
-    path('api/', include('content_app.urls')),
+    path('api/', include('content_app.urls')),  # Inclua as URLs do seu app
+
+   # Schema OpenAPI
+   path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+
+   # UIs de documentação
+   path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+   path('api/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 ]

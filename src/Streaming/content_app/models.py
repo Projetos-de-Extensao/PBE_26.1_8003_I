@@ -21,3 +21,28 @@ class Content(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Comment(models.Model):
+    content = models.ForeignKey(Content, related_name='comments', on_delete=models.CASCADE)
+    author = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
+    text = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Comment by {self.author.username} on {self.content.title}'    
+    
+class Playlist(models.Model):
+    title = models.CharField(max_length=255)  # Título da playlist
+    description = models.TextField(blank=True, null=True)  # Descrição opcional da playlist
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='playlists')  # Proprietário da playlist
+    contents = models.ManyToManyField(Content, related_name='playlists')  # Conteúdos incluídos na playlist
+    created_at = models.DateTimeField(auto_now_add=True)  # Data de criação
+    updated_at = models.DateTimeField(auto_now=True)  # Data de última atualização
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'Playlist'
+        verbose_name_plural = 'Playlists'
+
+    def __str__(self):
+        return self.title    
