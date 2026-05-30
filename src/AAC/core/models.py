@@ -124,6 +124,12 @@ class AtividadeComplementar(models.Model):
         related_name='atividades'
     )
 
+    alunos_participantes = models.ManyToManyField(
+        Aluno,
+        related_name='atividades_internas',
+        blank=True
+    )
+
     coordenador = models.ForeignKey(
         Coordenador,
         on_delete=models.SET_NULL,

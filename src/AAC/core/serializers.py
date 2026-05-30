@@ -64,6 +64,8 @@ class AtividadeComplementarSerializer(serializers.ModelSerializer):
 
     aluno = AlunoSerializer(read_only=True)
 
+    alunos_participantes = AlunoSerializer(many=True, read_only=True)
+
     coordenador = CoordenadorSerializer(read_only=True)
 
     organizacao = OrgAcademicaSerializer(read_only=True)
@@ -93,6 +95,7 @@ class AtividadeComplementarWriteSerializer(serializers.ModelSerializer):
             'tipo_origem',
             'caminho_comprovante',
             'aluno',
+            'alunos_participantes',
             'coordenador',
             'organizacao',
             'tipo_atividade',

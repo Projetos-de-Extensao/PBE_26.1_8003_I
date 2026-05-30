@@ -109,16 +109,18 @@ class ValidacaoViewSet(viewsets.ModelViewSet):
         atividade = validacao.atividade
 
         atividade.status = AtividadeComplementar.Status.VALIDADO
-        atividade.carga_horaria_validada = (
-        atividade.carga_horaria_solicitada
-        )
-
+        atividade.carga_horaria_validada = atividade.carga_horaria_solicitada
+        atividade.coordenador = self.request.user.coordenador
         atividade.save()
 
-        aluno = atividade.aluno
+        horas = atividade.carga_horaria_validada
 
-        aluno.total_horas_integralizadas += (
-            atividade.carga_horaria_validada
-        )
+        if atividade.tipo_origem == AtividadeComplementar.Origem.EXTERNA:
+            aluno = atividade.aluno
+            aluno.total_horas_integralizadas += horas
+            aluno.save()
 
-        aluno.save()
+        elif atividade.tipo_origem == AtividadeComplementar.Origem.INTERNA:
+            for aluno in atividade.alunos_participantes.all():
+                aluno.total_horas_integralizadas += horas
+                aluno.save()
