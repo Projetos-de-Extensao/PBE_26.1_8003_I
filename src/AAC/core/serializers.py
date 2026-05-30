@@ -81,3 +81,27 @@ class ValidacaoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Validacao
         fields = '__all__'
+
+class AtividadeComplementarWriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AtividadeComplementar
+        fields = [
+            'descricao',
+            'carga_horaria_solicitada',
+            'carga_horaria_validada',
+            'status',
+            'tipo_origem',
+            'caminho_comprovante',
+            'aluno',
+            'coordenador',
+            'organizacao',
+            'tipo_atividade',
+        ]        
+
+class ValidacaoWriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Validacao
+        fields = [
+            'atividade',
+            'justificativa'
+        ]        

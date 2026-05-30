@@ -1,4 +1,7 @@
 from rest_framework import viewsets
+from .permissions import IsAluno, IsCoordenador, IsOrgAcademica
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.exceptions import PermissionDenied
 
 from .models import (
     Usuario,
@@ -19,7 +22,9 @@ from .serializers import (
     EixoTematicoSerializer,
     TipoAtividadeSerializer,
     AtividadeComplementarSerializer,
-    ValidacaoSerializer
+    AtividadeComplementarWriteSerializer,
+    ValidacaoSerializer,
+    ValidacaoWriteSerializer
 )
 
 class UsuarioViewSet(viewsets.ModelViewSet):
@@ -62,10 +67,58 @@ class AtividadeComplementarViewSet(viewsets.ModelViewSet):
 
     queryset = AtividadeComplementar.objects.all()
 
-    serializer_class = AtividadeComplementarSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_serializer_class(self):
+        if self.action in ['create', 'update', 'partial_update']:
+            return AtividadeComplementarWriteSerializer
+        return AtividadeComplementarSerializer
+
+    def perform_create(self, serializer):
+        usuario = self.request.user
+        tipo_origem = self.request.data.get('tipo_origem')
+
+        if usuario.perfil == 'ALUNO':
+            if tipo_origem != 'EXTERNA':
+                raise PermissionDenied('Aluno só pode criar atividades externas.')
+
+        elif usuario.perfil == 'COORDENADOR':
+            if tipo_origem != 'INTERNA':
+                raise PermissionDenied('Coordenador só pode criar atividades internas.')
+
+        elif usuario.perfil == 'ORG':
+            if tipo_origem != 'INTERNA':
+                raise PermissionDenied('Organização só pode criar atividades internas.')
+
+        serializer.save()
 
 class ValidacaoViewSet(viewsets.ModelViewSet):
 
     queryset = Validacao.objects.all()
 
-    serializer_class = ValidacaoSerializer
+    permission_classes = [IsCoordenador]
+
+    def get_serializer_class(self):
+        if self.action in ['create', 'update', 'partial_update']:
+            return ValidacaoWriteSerializer
+        return ValidacaoSerializer
+
+    def perform_create(self, serializer):
+        validacao = serializer.save()
+
+        atividade = validacao.atividade
+
+        atividade.status = AtividadeComplementar.Status.VALIDADO
+        atividade.carga_horaria_validada = (
+        atividade.carga_horaria_solicitada
+        )
+
+        atividade.save()
+
+        aluno = atividade.aluno
+
+        aluno.total_horas_integralizadas += (
+            atividade.carga_horaria_validada
+        )
+
+        aluno.save()
