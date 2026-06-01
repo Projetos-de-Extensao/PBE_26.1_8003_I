@@ -41,8 +41,8 @@ REST_FRAMEWORK = {
 }
 
 SPECTACULAR_SETTINGS = {
-   'TITLE': 'API de Conteúdos',
-   'DESCRIPTION': 'Documentação da API para o app de streaming de áudio e vídeo',
+   'TITLE': 'API de AAC',
+   'DESCRIPTION': 'Documentação da API para o app de Atividades Acadêmicas Complementares',
    'VERSION': '1.0.0',
 }
 
