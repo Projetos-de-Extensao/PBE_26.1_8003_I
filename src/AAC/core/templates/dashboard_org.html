@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Organização</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+
+<header class="header">
+    <div class="header-left">
+        <img src="{% static 'img/logo_ibmec.png' %}" alt="IBMEC">
+        <h1>Dashboard Organização Acadêmica</h1>
+    </div>
+
+    <a href="{% url 'logout' %}" class="logout">Sair</a>
+</header>
+
+<main class="container">
+
+    <div class="cards">
+        <div class="card">
+            <h2>Nome da Organização</h2>
+            <p>{{ org.nome_entidade }}</p>
+        </div>
+
+        <div class="card">
+            <h2>Representante</h2>
+            <p>{{ org.usuario.username }}</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Ações</h2>
+        <a href="#" class="btn">Cadastrar Atividade Interna</a>
+    </div>
+
+</main>
+
+</body>
+</html>

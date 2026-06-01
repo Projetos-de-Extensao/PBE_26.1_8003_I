@@ -1,0 +1,82 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Aluno</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+
+<header class="header">
+    <div class="header-left">
+        <img src="{% static 'img/logo_ibmec.png' %}" alt="IBMEC">
+        <h1>Dashboard do Aluno</h1>
+    </div>
+
+    <a href="{% url 'logout' %}" class="logout">Sair</a>
+</header>
+
+<main class="container">
+
+    <div class="cards">
+        <div class="card">
+            <h2>Nome</h2>
+            <p>{{ aluno.usuario.username }}</p>
+        </div>
+
+        <div class="card">
+            <h2>Matrícula</h2>
+            <p>{{ aluno.matricula }}</p>
+        </div>
+
+        <div class="card">
+            <h2>Curso</h2>
+            <p>{{ aluno.curso }}</p>
+        </div>
+
+        <div class="card">
+            <h2>Total de Horas</h2>
+            <p>{{ aluno.total_horas_integralizadas }}</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Histórico de Atividades</h2>
+
+        <a href="#" class="btn">Cadastrar Atividade Externa</a>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Descrição</th>
+                    <th>Carga Solicitada</th>
+                    <th>Carga Validada</th>
+                    <th>Status</th>
+                    <th>Origem</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for atividade in atividades %}
+                    <tr>
+                        <td>{{ atividade.descricao }}</td>
+                        <td>{{ atividade.carga_horaria_solicitada }}</td>
+                        <td>{{ atividade.carga_horaria_validada }}</td>
+                        <td>{{ atividade.status }}</td>
+                        <td>{{ atividade.tipo_origem }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="5">Nenhuma atividade cadastrada.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</main>
+
+</body>
+</html>

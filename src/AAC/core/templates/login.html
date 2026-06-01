@@ -1,0 +1,65 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Sistema AAC IBMEC</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+
+<body>
+    <div class="login-container">
+
+        <div class="logo-container">
+            <img
+                src="{% static 'img/logo_ibmec.png' %}"
+                alt="Logo IBMEC"
+                class="logo"
+            >
+        </div>
+
+        <h1>Sistema AAC</h1>
+        <p class="subtitle">Atividades Acadêmicas Complementares</p>
+
+        {% if erro %}
+            <div class="erro">
+                {{ erro }}
+            </div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="username">Usuário</label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    name="username" 
+                    placeholder="Digite seu usuário"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Senha</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="Digite sua senha"
+                    required
+                >
+            </div>
+
+            <button type="submit">Entrar</button>
+        </form>
+
+        <div class="footer">
+            IBMEC · Sistema Acadêmico
+        </div>
+
+    </div>
+</body>
+</html>

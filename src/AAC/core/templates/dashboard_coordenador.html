@@ -1,0 +1,75 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Coordenador</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+
+<header class="header">
+    <div class="header-left">
+        <img src="{% static 'img/logo_ibmec.png' %}" alt="IBMEC">
+        <h1>Dashboard do Coordenador</h1>
+    </div>
+
+    <a href="{% url 'logout' %}" class="logout">Sair</a>
+</header>
+
+<main class="container">
+
+    <div class="cards">
+        <div class="card">
+            <h2>Nome</h2>
+            <p>{{ coordenador.usuario.username }}</p>
+        </div>
+
+        <div class="card">
+            <h2>SIA Funcionário</h2>
+            <p>{{ coordenador.sia_funcionario }}</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Ações</h2>
+        <a href="#" class="btn">Cadastrar Atividade Interna</a>
+    </div>
+
+    <div class="section">
+        <h2>Atividades Pendentes de Validação</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Descrição</th>
+                    <th>Aluno</th>
+                    <th>Carga Horária</th>
+                    <th>Origem</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for atividade in atividades_pendentes %}
+                    <tr>
+                        <td>{{ atividade.descricao }}</td>
+                        <td>{{ atividade.aluno }}</td>
+                        <td>{{ atividade.carga_horaria_solicitada }}</td>
+                        <td>{{ atividade.tipo_origem }}</td>
+                        <td>{{ atividade.status }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="5">Nenhuma atividade pendente.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</main>
+
+</body>
+</html>
