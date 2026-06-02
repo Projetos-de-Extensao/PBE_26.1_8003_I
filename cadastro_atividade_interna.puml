@@ -1,0 +1,17 @@
+@startsalt cadastro_interno
+{+
+  == UC05 - Cadastrar Atividade Interna
+  --
+  Nome da Atividade: | "Semana de Inovação IBMEC   "
+  Carga Horária:     | 10 Horas
+  --
+  **Alunos Participantes (Matrículas):**
+  {
+    "20240123"
+    "20240555"
+    "20240999"
+  }
+  --
+  [  Cancelar  ] | [ Lançar Horas  ]
+}
+@endsalt

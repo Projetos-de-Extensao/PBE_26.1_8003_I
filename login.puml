@@ -1,0 +1,10 @@
+@startsalt login
+{+
+  == Login - Sistema AAC IBMEC
+  .
+  Usuário (E-mail): | "exemplo@ibmec.edu.br  "
+  Senha:            | "******* "
+  .
+  [  Entrar  ] | [ Esqueci a Senha ]
+}
+@endsalt

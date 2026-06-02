@@ -1,0 +1,24 @@
+@startmindmap mapamental
+* Sistema de Gerenciamento de Atividades Complementares IBMEC
+ ** Requisitos Elicitados
+     *** Registro, validação e acompanhamento
+     *** Separação: Atividades Internas e Externas
+     *** Controle automático de horas obrigatórias
+    ** Funcionalidades
+     *** Armazenamento de comprovantes
+     *** Controle de limites por tipo
+     *** Histórico completo do aluno
+     *** Soma automática de horas
+    ** Regras Gerais
+     *** Atividades obrigatórias para colação de grau
+     *** Devem ser durante o curso
+     *** Estágio e TCC não contam
+    ** Limites por Tipo
+     *** Evento: máximo 10h
+     *** Idiomas: máximo 30h total
+     *** Estágio: limite por semestre
+     *** Mesário: até 80h total
+    ** Validação
+     *** Internas: automática
+     *** Externas: documento + análise manual
+@endmindmap

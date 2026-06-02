@@ -1,0 +1,23 @@
+@startsalt dashboard_aluno
+{+
+  == Dashboard: João Silva (Matrícula: 20240123)
+  --
+  **Progresso Geral:** [####################----] 73%
+  --
+  {T
+    Tipo | Horas Obtidas | Máximo | Status
+    Interna        | 40h           | Não possui    | Em progresso
+    Externa      | 20h           | 70h    | Em progresso
+  }
+  --
+  **Minhas Atividades Recentes (UC04):**
+  {#
+    Data | Atividade | Tipo | Horas | Status
+    10/04 | Curso Python | Externa | 20h | Pendente
+    05/03 | Monitoria IA | Interna | 40h | Validado
+    01/02 | Palestra Soft | Interna | 5h  | Validado
+  }
+  --
+  [ + Nova Atividade Externa ] | [ Gerar Relatório ]
+}
+@endsalt

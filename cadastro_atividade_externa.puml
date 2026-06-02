@@ -1,0 +1,12 @@
+@startsalt cadastro_externo
+{+
+  == UC02 - Cadastrar Atividade Externa
+  --
+  Tipo de Atividade: | ^Cursos Livres / Idiomas^
+  Carga Horária:     | 20 Horas
+  Descrição:         | "Certificado Udemy - Data Science"
+  Comprovante:       | [ Selecionar PDF/Imagem... ]
+  --
+  [  Cancelar  ] | [ Enviar Solicitação ]
+}
+@endsalt
