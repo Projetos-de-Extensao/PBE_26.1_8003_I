@@ -87,6 +87,7 @@ class AtividadeComplementar(models.Model):
 
     class Status(models.TextChoices):
         PENDENTE = 'PENDENTE', 'Pendente'
+        ABERTA = 'ABERTA', 'Aberta'
         VALIDADO = 'VALIDADO', 'Validado'
         REJEITADO = 'REJEITADO', 'Rejeitado'
 
@@ -115,13 +116,17 @@ class AtividadeComplementar(models.Model):
     )
 
     caminho_comprovante = models.FileField(
-        upload_to='comprovantes/'
+        upload_to='comprovantes/',
+        null=True,
+        blank=True
     )
 
     aluno = models.ForeignKey(
         Aluno,
         on_delete=models.CASCADE,
-        related_name='atividades'
+        related_name='atividades',
+        null=True,
+        blank=True
     )
 
     alunos_participantes = models.ManyToManyField(

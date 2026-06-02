@@ -34,7 +34,7 @@
 
     <div class="section">
         <h2>Ações</h2>
-        <a href="#" class="btn">Cadastrar Atividade Interna</a>
+        <a href="{% url 'cadastrar_atividade_interna_coordenador' %}" class="btn">Cadastrar Atividade Interna</a>
     </div>
 
     <div class="section">
@@ -48,6 +48,7 @@
                     <th>Carga Horária</th>
                     <th>Origem</th>
                     <th>Status</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
 
@@ -59,10 +60,25 @@
                         <td>{{ atividade.carga_horaria_solicitada }}</td>
                         <td>{{ atividade.tipo_origem }}</td>
                         <td>{{ atividade.status }}</td>
+                        <td>
+                            <a 
+                                href="{% url 'aprovar_atividade' atividade.id %}" 
+                                class="btn"
+                            >
+                                Aprovar
+                            </a>
+
+                            <a 
+                                href="{% url 'rejeitar_atividade' atividade.id %}" 
+                                class="btn btn-danger"
+                            >
+                                Rejeitar
+                            </a>
+                        </td>
                     </tr>
                 {% empty %}
                     <tr>
-                        <td colspan="5">Nenhuma atividade pendente.</td>
+                        <td colspan="6">Nenhuma atividade pendente.</td>
                     </tr>
                 {% endfor %}
             </tbody>

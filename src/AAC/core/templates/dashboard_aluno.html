@@ -43,6 +43,46 @@
     </div>
 
     <div class="section">
+        <h2>Atividades Internas Disponíveis</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Descrição</th>
+                    <th>Carga Horária</th>
+                    <th>Tipo</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for atividade in atividades_internas_abertas %}
+                    <tr>
+                        <td>{{ atividade.descricao }}</td>
+                        <td>{{ atividade.carga_horaria_solicitada }}</td>
+                        <td>{{ atividade.tipo_atividade.nome }}</td>
+                        <td>
+                            <a 
+                                href="{% url 'participar_atividade_interna' atividade.id %}" 
+                                class="btn"
+                            >
+                                Participar
+                            </a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4">
+                            Nenhuma atividade interna disponível.
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="section">
         <h2>Histórico de Atividades</h2>
 
         <a href="{% url 'cadastrar_atividade_externa' %}" class="btn">Cadastrar Atividade Externa</a>

@@ -155,3 +155,12 @@ th {
     border-color: #ffc20e;
     box-shadow: 0 0 0 3px rgba(255, 194, 14, 0.25);
 }
+
+.btn-danger {
+    background-color: #c00000;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #900000;
+}

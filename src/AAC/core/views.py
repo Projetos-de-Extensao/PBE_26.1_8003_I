@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 from .models import Aluno, Coordenador, OrgAcademica, AtividadeComplementar, TipoAtividade
 
@@ -42,7 +43,14 @@ def dashboard_aluno(request):
     aluno = Aluno.objects.get(usuario=request.user)
 
     atividades = AtividadeComplementar.objects.filter(
-        aluno=aluno
+        Q(aluno=aluno) | Q(alunos_participantes=aluno)
+    ).distinct()
+
+    atividades_internas_abertas = AtividadeComplementar.objects.filter(
+        tipo_origem=AtividadeComplementar.Origem.INTERNA,
+        status=AtividadeComplementar.Status.ABERTA
+    ).exclude(
+        alunos_participantes=aluno
     )
 
     return render(
@@ -50,7 +58,8 @@ def dashboard_aluno(request):
         'dashboard_aluno.html',
         {
             'aluno': aluno,
-            'atividades': atividades
+            'atividades': atividades,
+            'atividades_internas_abertas': atividades_internas_abertas
         }
     )
 
@@ -124,3 +133,123 @@ def cadastrar_atividade_externa(request):
             'tipos_atividade': tipos_atividade
         }
     )
+
+@login_required
+def participar_atividade_interna(request, atividade_id):
+    aluno = Aluno.objects.get(usuario=request.user)
+
+    atividade = AtividadeComplementar.objects.get(
+        id=atividade_id,
+        tipo_origem=AtividadeComplementar.Origem.INTERNA,
+        status=AtividadeComplementar.Status.ABERTA
+    )
+
+    if not atividade.alunos_participantes.filter(id=aluno.id).exists():
+        atividade.alunos_participantes.add(aluno)
+
+        aluno.total_horas_integralizadas += atividade.carga_horaria_solicitada
+        aluno.save()
+
+    return redirect('dashboard_aluno')
+
+@login_required
+def cadastrar_atividade_interna_coordenador(request):
+    coordenador = Coordenador.objects.get(usuario=request.user)
+    tipos_atividade = TipoAtividade.objects.all()
+
+    if request.method == 'POST':
+        descricao = request.POST.get('descricao')
+        carga_horaria = request.POST.get('carga_horaria_solicitada')
+        tipo_atividade_id = request.POST.get('tipo_atividade')
+
+        tipo_atividade = TipoAtividade.objects.get(id=tipo_atividade_id)
+
+        AtividadeComplementar.objects.create(
+            descricao=descricao,
+            carga_horaria_solicitada=carga_horaria,
+            tipo_origem=AtividadeComplementar.Origem.INTERNA,
+            status=AtividadeComplementar.Status.ABERTA,
+            coordenador=coordenador,
+            tipo_atividade=tipo_atividade
+        )
+
+        return redirect('dashboard_coordenador')
+
+    return render(
+        request,
+        'cadastrar_atividade_interna.html',
+        {
+            'tipos_atividade': tipos_atividade,
+            'tipo_usuario': 'Coordenador',
+            'voltar_url': 'dashboard_coordenador'
+        }
+    )
+
+@login_required
+def cadastrar_atividade_interna_org(request):
+    org = OrgAcademica.objects.get(usuario=request.user)
+    tipos_atividade = TipoAtividade.objects.all()
+
+    if request.method == 'POST':
+        descricao = request.POST.get('descricao')
+        carga_horaria = request.POST.get('carga_horaria_solicitada')
+        tipo_atividade_id = request.POST.get('tipo_atividade')
+
+        tipo_atividade = TipoAtividade.objects.get(id=tipo_atividade_id)
+
+        AtividadeComplementar.objects.create(
+            descricao=descricao,
+            carga_horaria_solicitada=carga_horaria,
+            tipo_origem=AtividadeComplementar.Origem.INTERNA,
+            status=AtividadeComplementar.Status.ABERTA,
+            organizacao=org,
+            tipo_atividade=tipo_atividade
+        )
+
+        return redirect('dashboard_org')
+
+    return render(
+        request,
+        'cadastrar_atividade_interna.html',
+        {
+            'tipos_atividade': tipos_atividade,
+            'tipo_usuario': 'Organização Acadêmica',
+            'voltar_url': 'dashboard_org'
+        }
+    )
+
+@login_required
+def aprovar_atividade(request, atividade_id):
+    coordenador = Coordenador.objects.get(usuario=request.user)
+
+    atividade = AtividadeComplementar.objects.get(
+        id=atividade_id,
+        status=AtividadeComplementar.Status.PENDENTE
+    )
+
+    atividade.status = AtividadeComplementar.Status.VALIDADO
+    atividade.carga_horaria_validada = atividade.carga_horaria_solicitada
+    atividade.coordenador = coordenador
+    atividade.save()
+
+    if atividade.aluno:
+        atividade.aluno.total_horas_integralizadas += atividade.carga_horaria_validada
+        atividade.aluno.save()
+
+    return redirect('dashboard_coordenador')
+
+
+@login_required
+def rejeitar_atividade(request, atividade_id):
+    coordenador = Coordenador.objects.get(usuario=request.user)
+
+    atividade = AtividadeComplementar.objects.get(
+        id=atividade_id,
+        status=AtividadeComplementar.Status.PENDENTE
+    )
+
+    atividade.status = AtividadeComplementar.Status.REJEITADO
+    atividade.coordenador = coordenador
+    atividade.save()
+
+    return redirect('dashboard_coordenador')
