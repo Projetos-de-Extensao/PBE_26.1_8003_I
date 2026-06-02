@@ -5,14 +5,14 @@ title: Levantamento de Requisitos
 
 # **06 - Levantamento de Requisitos e Caso de Uso**
 
-**Sistema:** XXXX\*)
+**Sistema:** Banco de Dados AAC
 
 ---
 
 ## **1. Identificação dos Stakeholders**
 
 - **Aluno:** Aluno irá entrar e cadastrar sua atividade
-- **Cordenação:** Irá avaliar e aprovar a atividade do aluno
+- **Coordenação:** Irá avaliar e aprovar a atividade do aluno
 - **Organização Acadêmica:** Junto com a coordenação, também é responsável por cadastrar atividades internas
 
 ---
