@@ -53,13 +53,16 @@ def dashboard_aluno(request):
         alunos_participantes=aluno
     )
 
+    HORAS_NECESSARIAS = 140
+
     return render(
         request,
         'dashboard_aluno.html',
         {
             'aluno': aluno,
             'atividades': atividades,
-            'atividades_internas_abertas': atividades_internas_abertas
+            'atividades_internas_abertas': atividades_internas_abertas,
+            'horas_necessarias': HORAS_NECESSARIAS
         }
     )
 
