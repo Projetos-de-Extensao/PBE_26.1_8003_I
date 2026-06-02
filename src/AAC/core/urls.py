@@ -11,6 +11,12 @@ urlpatterns = [
     ),
 
     path(
+        'atividades/externa/cadastrar/',
+        views.cadastrar_atividade_externa,
+        name='cadastrar_atividade_externa'
+    ),
+
+    path(
         'dashboard/coordenador/',
         views.dashboard_coordenador,
         name='dashboard_coordenador'

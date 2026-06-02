@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-from .models import Aluno, Coordenador, OrgAcademica, AtividadeComplementar
+from .models import Aluno, Coordenador, OrgAcademica, AtividadeComplementar, TipoAtividade
 
 
 def login_view(request):
@@ -89,3 +89,38 @@ def dashboard_org(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+
+@login_required
+def cadastrar_atividade_externa(request):
+    aluno = Aluno.objects.get(usuario=request.user)
+    tipos_atividade = TipoAtividade.objects.all()
+
+    if request.method == 'POST':
+        descricao = request.POST.get('descricao')
+        carga_horaria = request.POST.get('carga_horaria_solicitada')
+        tipo_atividade_id = request.POST.get('tipo_atividade')
+        comprovante = request.FILES.get('caminho_comprovante')
+
+        tipo_atividade = TipoAtividade.objects.get(id=tipo_atividade_id)
+
+        AtividadeComplementar.objects.create(
+            descricao=descricao,
+            carga_horaria_solicitada=carga_horaria,
+            tipo_origem=AtividadeComplementar.Origem.EXTERNA,
+            status=AtividadeComplementar.Status.PENDENTE,
+            aluno=aluno,
+            tipo_atividade=tipo_atividade,
+            caminho_comprovante=comprovante
+        )
+
+        return redirect('dashboard_aluno')
+
+    return render(
+        request,
+        'cadastrar_atividade_externa.html',
+        {
+            'aluno': aluno,
+            'tipos_atividade': tipos_atividade
+        }
+    )

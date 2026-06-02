@@ -128,3 +128,30 @@ th {
 .status-rejeitado {
     color: #c00000;
 }
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #002b5c;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccd3dd;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #ffc20e;
+    box-shadow: 0 0 0 3px rgba(255, 194, 14, 0.25);
+}
