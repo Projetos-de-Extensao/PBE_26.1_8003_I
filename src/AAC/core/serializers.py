@@ -90,15 +90,8 @@ class AtividadeComplementarWriteSerializer(serializers.ModelSerializer):
         fields = [
             'descricao',
             'carga_horaria_solicitada',
-            'carga_horaria_validada',
-            'status',
-            'tipo_origem',
-            'caminho_comprovante',
-            'aluno',
-            'alunos_participantes',
-            'coordenador',
-            'organizacao',
             'tipo_atividade',
+            'caminho_comprovante',
         ]        
 
 class ValidacaoWriteSerializer(serializers.ModelSerializer):

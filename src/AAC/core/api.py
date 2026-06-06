@@ -2,6 +2,8 @@ from rest_framework import viewsets
 from .permissions import IsAluno, IsCoordenador, IsOrgAcademica
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
+from django.db import models
+from django.db.models import Q
 
 from .models import (
     Usuario,
@@ -73,24 +75,67 @@ class AtividadeComplementarViewSet(viewsets.ModelViewSet):
         if self.action in ['create', 'update', 'partial_update']:
             return AtividadeComplementarWriteSerializer
         return AtividadeComplementarSerializer
+    
+    def get_queryset(self):
+        usuario = self.request.user
+
+        if usuario.perfil == 'ALUNO':
+            aluno = Aluno.objects.get(usuario=usuario)
+
+            return AtividadeComplementar.objects.filter(
+                Q(aluno=aluno) |
+                Q(alunos_participantes=aluno)
+            ).distinct()
+
+        elif usuario.perfil == 'COORDENADOR':
+            coordenador = Coordenador.objects.get(usuario=usuario)
+
+            return AtividadeComplementar.objects.filter(
+                Q(coordenador=coordenador) |
+                Q(status=AtividadeComplementar.Status.PENDENTE)
+            ).distinct()
+
+        elif usuario.perfil == 'ORG':
+            org = OrgAcademica.objects.get(usuario=usuario)
+
+            return AtividadeComplementar.objects.filter(
+                organizacao=org
+            )
+
+        return AtividadeComplementar.objects.none()
 
     def perform_create(self, serializer):
         usuario = self.request.user
-        tipo_origem = self.request.data.get('tipo_origem')
 
         if usuario.perfil == 'ALUNO':
-            if tipo_origem != 'EXTERNA':
-                raise PermissionDenied('Aluno só pode criar atividades externas.')
+            aluno = Aluno.objects.get(usuario=usuario)
+
+            serializer.save(
+                aluno=aluno,
+                tipo_origem=AtividadeComplementar.Origem.EXTERNA,
+                status=AtividadeComplementar.Status.PENDENTE,
+                carga_horaria_validada=None
+            )
 
         elif usuario.perfil == 'COORDENADOR':
-            if tipo_origem != 'INTERNA':
-                raise PermissionDenied('Coordenador só pode criar atividades internas.')
+            coordenador = Coordenador.objects.get(usuario=usuario)
+
+            serializer.save(
+                coordenador=coordenador,
+                tipo_origem=AtividadeComplementar.Origem.INTERNA,
+                status=AtividadeComplementar.Status.ABERTA,
+                carga_horaria_validada=None
+            )
 
         elif usuario.perfil == 'ORG':
-            if tipo_origem != 'INTERNA':
-                raise PermissionDenied('Organização só pode criar atividades internas.')
+            org = OrgAcademica.objects.get(usuario=usuario)
 
-        serializer.save()
+            serializer.save(
+                organizacao=org,
+                tipo_origem=AtividadeComplementar.Origem.INTERNA,
+                status=AtividadeComplementar.Status.ABERTA,
+                carga_horaria_validada=None
+            )
 
 class ValidacaoViewSet(viewsets.ModelViewSet):
 

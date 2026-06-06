@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
 from .models import Aluno, Coordenador, OrgAcademica, AtividadeComplementar, TipoAtividade
-
+from .services import calcular_horas_validadas
 
 def login_view(request):
     if request.method == 'POST':
@@ -230,14 +230,17 @@ def aprovar_atividade(request, atividade_id):
         status=AtividadeComplementar.Status.PENDENTE
     )
 
+    aluno = atividade.aluno
+
+    horas_validadas = calcular_horas_validadas(aluno, atividade)
+
     atividade.status = AtividadeComplementar.Status.VALIDADO
-    atividade.carga_horaria_validada = atividade.carga_horaria_solicitada
+    atividade.carga_horaria_validada = horas_validadas
     atividade.coordenador = coordenador
     atividade.save()
 
-    if atividade.aluno:
-        atividade.aluno.total_horas_integralizadas += atividade.carga_horaria_validada
-        atividade.aluno.save()
+    aluno.total_horas_integralizadas += horas_validadas
+    aluno.save()
 
     return redirect('dashboard_coordenador')
 
