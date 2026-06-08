@@ -1,4 +1,6 @@
 asgiref==3.11.1
+Pillow>=10.0.0
+qrcode[pil]>=7.4.2
 attrs==26.1.0
 Django==6.0.5
 django-cors-headers==4.9.0

@@ -1,4 +1,8 @@
+import io
+import qrcode
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from django.core.files.base import ContentFile
 from django.db import models
 
 
@@ -153,6 +157,30 @@ class AtividadeComplementar(models.Model):
         TipoAtividade,
         on_delete=models.CASCADE
     )
+
+    imagem_qr = models.ImageField(
+        upload_to='qrcodes/',
+        null=True,
+        blank=True
+    )
+
+    def _gerar_qr_code(self):
+        base_url = getattr(settings, 'SITE_URL', 'http://localhost:8000')
+        url = f"{base_url}/atividades/{self.pk}/"
+        img = qrcode.make(url)
+        buffer = io.BytesIO()
+        img.save(buffer, format='PNG')
+        return ContentFile(buffer.getvalue(), name=f'qr_atividade_{self.pk}.png')
+
+    def save(self, *args, **kwargs):
+        gerar_qr = not self.pk or not self.imagem_qr
+        super().save(*args, **kwargs)
+        if gerar_qr:
+            self.imagem_qr.save(
+                f'qr_atividade_{self.pk}.png',
+                self._gerar_qr_code(),
+                save=True
+            )
 
     def __str__(self):
         return self.descricao

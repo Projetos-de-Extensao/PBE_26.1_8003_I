@@ -22,6 +22,10 @@
     <div class="section">
         <h2>Nova Atividade Interna - {{ tipo_usuario }}</h2>
 
+        <p>
+            Ao cadastrar a atividade, um QR Code de acesso sera gerado automaticamente.
+        </p>
+
         <form method="POST">
             {% csrf_token %}
 
@@ -52,6 +56,19 @@
                 Cadastrar Atividade
             </button>
         </form>
+
+        {% if atividade_criada and atividade_criada.imagem_qr %}
+            <hr>
+            <h3>QR Code da atividade criada</h3>
+            <p>
+                Use este QR Code para acessar rapidamente a pagina da atividade.
+            </p>
+            <img
+                src="{{ atividade_criada.imagem_qr.url }}"
+                alt="QR Code da atividade {{ atividade_criada.id }}"
+                width="180"
+            >
+        {% endif %}
     </div>
 </main>
 
