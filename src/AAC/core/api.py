@@ -4,6 +4,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
 from django.db import models
 from django.db.models import Q
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from .services import aprovar_atividade_service
 
 from .models import (
     Usuario,
@@ -67,7 +70,14 @@ class TipoAtividadeViewSet(viewsets.ModelViewSet):
 
 class AtividadeComplementarViewSet(viewsets.ModelViewSet):
 
-    queryset = AtividadeComplementar.objects.all()
+    queryset = AtividadeComplementar.objects.select_related(
+        'aluno',
+        'coordenador',
+        'organizacao',
+        'tipo_atividade'
+    ).prefetch_related(
+        'alunos_participantes'
+    )
 
     permission_classes = [IsAuthenticated]
 
@@ -77,12 +87,21 @@ class AtividadeComplementarViewSet(viewsets.ModelViewSet):
         return AtividadeComplementarSerializer
     
     def get_queryset(self):
+        base_queryset = AtividadeComplementar.objects.select_related(
+            'aluno',
+            'coordenador',
+            'organizacao',
+            'tipo_atividade'
+        ).prefetch_related(
+            'alunos_participantes'
+        )
+
         usuario = self.request.user
 
         if usuario.perfil == 'ALUNO':
             aluno = Aluno.objects.get(usuario=usuario)
 
-            return AtividadeComplementar.objects.filter(
+            return base_queryset.filter(
                 Q(aluno=aluno) |
                 Q(alunos_participantes=aluno)
             ).distinct()
@@ -136,10 +155,45 @@ class AtividadeComplementarViewSet(viewsets.ModelViewSet):
                 status=AtividadeComplementar.Status.ABERTA,
                 carga_horaria_validada=None
             )
+            
+    @action(detail=True, methods=['post'])
+    def rejeitar(self, request, pk=None):
+        usuario = request.user
+
+        if usuario.perfil != 'COORDENADOR':
+            raise PermissionDenied(
+                'Apenas coordenadores podem rejeitar atividades.'
+            )
+
+        coordenador = Coordenador.objects.get(usuario=usuario)
+
+        atividade = self.get_object()
+
+        if atividade.status != AtividadeComplementar.Status.PENDENTE:
+            return Response(
+                {
+                    'erro': 'Apenas atividades pendentes podem ser rejeitadas.'
+                },
+                status=400
+            )
+
+        atividade.status = AtividadeComplementar.Status.REJEITADO
+        atividade.coordenador = coordenador
+        atividade.save()
+
+        return Response(
+            {
+                'mensagem': 'Atividade rejeitada com sucesso.',
+                'id': atividade.id,
+                'status': atividade.status
+            }
+        )        
 
 class ValidacaoViewSet(viewsets.ModelViewSet):
 
-    queryset = Validacao.objects.all()
+    queryset = Validacao.objects.select_related(
+        'atividade'
+    )
 
     permission_classes = [IsCoordenador]
 
@@ -152,20 +206,9 @@ class ValidacaoViewSet(viewsets.ModelViewSet):
         validacao = serializer.save()
 
         atividade = validacao.atividade
+        coordenador = self.request.user.coordenador
 
-        atividade.status = AtividadeComplementar.Status.VALIDADO
-        atividade.carga_horaria_validada = atividade.carga_horaria_solicitada
-        atividade.coordenador = self.request.user.coordenador
-        atividade.save()
-
-        horas = atividade.carga_horaria_validada
-
-        if atividade.tipo_origem == AtividadeComplementar.Origem.EXTERNA:
-            aluno = atividade.aluno
-            aluno.total_horas_integralizadas += horas
-            aluno.save()
-
-        elif atividade.tipo_origem == AtividadeComplementar.Origem.INTERNA:
-            for aluno in atividade.alunos_participantes.all():
-                aluno.total_horas_integralizadas += horas
-                aluno.save()
+        aprovar_atividade_service(
+            atividade=atividade,
+            coordenador=coordenador
+        )
