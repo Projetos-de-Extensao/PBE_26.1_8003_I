@@ -962,26 +962,63 @@
 
 
 <h1 id="transicao">Transição<a class="headerlink" href="#transicao" title="Permanent link">&para;</a></h1>
-<blockquote>
-<p>Objetivo: Entregar o sistema ao ambiente de produção e aos usuários finais.</p>
-</blockquote>
-<h2 id="principais-atividades">Principais atividades<a class="headerlink" href="#principais-atividades" title="Permanent link">&para;</a></h2>
+<h2 id="tutorial-de-uso-do-aplicativo-aac">Tutorial de Uso do Aplicativo AAC<a class="headerlink" href="#tutorial-de-uso-do-aplicativo-aac" title="Permanent link">&para;</a></h2>
+<h3 id="visao-geral">Visão geral<a class="headerlink" href="#visao-geral" title="Permanent link">&para;</a></h3>
+<p>O aplicativo AAC (Atividades Acadêmicas Complementares) permite que alunos, coordenadores e organizações gerenciem, validem e acompanhem atividades complementares. Este tutorial descreve como preparar o ambiente, executar o sistema localmente e usar as funcionalidades básicas.</p>
+<h3 id="pre-requisitos">Pré-requisitos<a class="headerlink" href="#pre-requisitos" title="Permanent link">&para;</a></h3>
 <ul>
-<li>
-<p>Realizar testes finais de aceitação.</p>
-</li>
-<li>
-<p>Treinar os usuários.</p>
-</li>
-<li>
-<p>Corrigir defeitos encontrados após a entrega.</p>
-</li>
-<li>
-<p>Preparar o ambiente de produção.</p>
-</li>
-<li>
-<p>Produto principal: Sistema funcionando no ambiente do cliente com usuários treinados.</p>
-</li>
+<li>Python 3.8+ instalado</li>
+<li>Git (opcional)</li>
+</ul>
+<h3 id="instalacao-e-execucao-windows-powershell">Instalação e execução (Windows - PowerShell)<a class="headerlink" href="#instalacao-e-execucao-windows-powershell" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Abra o PowerShell e navegue até a pasta do projeto:</li>
+</ol>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd </span><span class="n">c</span><span class="p">:\</span><span class="n">Users</span><span class="p">\</span><span class="n">mmpec</span><span class="p">\</span><span class="n">Downloads</span><span class="p">\</span><span class="n">PBE_26</span><span class="p">.</span><span class="n">1_8003_I</span><span class="p">\</span><span class="n">src</span><span class="p">\</span><span class="n">AAC</span>
+</span></code></pre></div>
+<ol>
+<li>Crie e ative um ambiente virtual, instale dependências:</li>
+</ol>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">python</span> <span class="n">-m</span> <span class="n">venv</span> <span class="p">.</span><span class="n">venv</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="p">.\.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Activate</span><span class="p">.</span><span class="n">ps1</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">pip</span> <span class="n">install</span> <span class="n">-r</span> <span class="n">requirements</span><span class="p">.</span><span class="n">txt</span>
+</span></code></pre></div>
+<ol>
+<li>Aplicar migrações e criar um superusuário (opcional para administração):</li>
+</ol>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">python</span> <span class="n">manage</span><span class="p">.</span><span class="n">py</span> <span class="n">migrate</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">python</span> <span class="n">manage</span><span class="p">.</span><span class="n">py</span> <span class="n">createsuperuser</span>
+</span></code></pre></div>
+<ol>
+<li>Iniciar o servidor de desenvolvimento:</li>
+</ol>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">python</span> <span class="n">manage</span><span class="p">.</span><span class="n">py</span> <span class="n">runserver</span>
+</span></code></pre></div>
+<p>O servidor ficará disponível em <code>http://127.0.0.1:8000/</code>.</p>
+<h3 id="configuracao-inicial">Configuração inicial<a class="headerlink" href="#configuracao-inicial" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Crie contas de teste para as funções principais: aluno, coordenador e organização.</li>
+<li>No painel admin (<code>/admin/</code>) você pode criar usuários, definir grupos/permissões e inspecionar modelos.</li>
+</ul>
+<h3 id="uso-basico-do-sistema">Uso básico do sistema<a class="headerlink" href="#uso-basico-do-sistema" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Login:</strong> Acesse a página de login e entre com as credenciais.</li>
+<li><strong>Dashboard do Aluno:</strong> Após login como aluno, use o painel para visualizar atividades atribuídas, status e histórico.</li>
+<li><strong>Cadastrar atividade interna/externa:</strong> Vá para as telas <code>cadastrar_atividade_interna</code> ou <code>cadastrar_atividade_externa</code>, preencha os dados e anexe comprovantes quando necessário.</li>
+<li><strong>Anexar comprovantes:</strong> No formulário de cadastro, utilize o campo de upload para enviar arquivos de comprovação.</li>
+<li><strong>Validação/Fluxo do Coordenador:</strong> O coordenador pode acessar o dashboard de validação, analisar submissões e alterar o status das atividades.</li>
+</ul>
+<h3 id="estrutura-importante-do-projeto">Estrutura importante do projeto<a class="headerlink" href="#estrutura-importante-do-projeto" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Código principal: <code>src/AAC/core/</code> (modelos, views, serializers, services)</li>
+<li>Gerenciamento do projeto Django: <code>src/AAC/manage.py</code></li>
+<li>Dependências: <code>src/AAC/requirements.txt</code></li>
+</ul>
+<h3 id="dicas-e-resolucao-de-problemas">Dicas e resolução de problemas<a class="headerlink" href="#dicas-e-resolucao-de-problemas" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Se houver erro de dependências, reveja <code>requirements.txt</code> e reinstale em um ambiente limpo.</li>
+<li>Se alterações em modelos não aparecerem, verifique acerto de migrações (<code>makemigrations</code> e <code>migrate</code>).</li>
+<li>Para ver logs detalhados, observe a saída do terminal onde o <code>runserver</code> foi iniciado.</li>
 </ul>
 
 
