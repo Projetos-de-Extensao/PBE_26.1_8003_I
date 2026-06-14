@@ -71,7 +71,9 @@ Lista de atividades
 
 Ator: Coordenação/Organização Acadêmica
 
-Fluxo: Admin cria atividade
+Fluxo: 
+
+Admin cria atividade
 
 Admin cria atividade
 
@@ -80,6 +82,18 @@ Define carga horária
 Associa alunos participantes
 
 Sistema lança horas automaticamente
+
+#### UC06 - Participar de Atividade Interna
+
+Ator: Aluno
+
+Fluxo:
+
+Aluno acessa dashboard 
+
+Acessa lista de atividades internas abertas
+
+Clica em participar
 
 ---
 
