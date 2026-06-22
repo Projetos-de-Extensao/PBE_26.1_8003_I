@@ -44,6 +44,7 @@
             <thead>
                 <tr>
                     <th>Descrição</th>
+                    <th>Data</th>
                     <th>Carga Horária</th>
                     <th>Status</th>
                     <th>QR Code</th>
@@ -54,6 +55,7 @@
                 {% for atividade in atividades_internas %}
                     <tr>
                         <td>{{ atividade.descricao }}</td>
+                        <td>{{ atividade.data_hora_evento|date:"d/m/Y H:i" }}</td>
                         <td>{{ atividade.carga_horaria_solicitada }}</td>
                         <td>{{ atividade.status }}</td>
 

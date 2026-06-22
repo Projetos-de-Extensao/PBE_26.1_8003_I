@@ -45,6 +45,11 @@
             </div>
 
             <div class="info-card">
+                <h3>Data e Horário</h3>
+                <p>{{ atividade.data_hora_evento|date:"d/m/Y H:i" }}</p>
+            </div>
+
+            <div class="info-card">
                 <h3>Palestrante</h3>
                 <p>
                     {{ atividade.palestrante|default:"Não informado" }}

@@ -15,9 +15,15 @@
         <h1>QR Code da Atividade</h1>
     </div>
 
-    <a href="{% url 'dashboard_coordenador' %}" class="logout">
-        Voltar
-    </a>
+    {% if perfil == 'COORDENADOR' %}
+        <a href="{% url 'dashboard_coordenador' %}" class="logout">
+            Voltar
+        </a>
+    {% else %}
+        <a href="{% url 'dashboard_org' %}" class="logout">
+            Voltar
+        </a>
+    {% endif %}    
 </header>
 
 <main class="container">
@@ -46,6 +52,16 @@
                 <span class="info-label">Local</span>
                 <span class="info-value">
                     {{ atividade.local }}
+                </span>
+            </div>
+
+            <div class="info-item">
+                <span class="info-label">
+                    Data e Horário
+                </span>
+
+                <span class="info-value">
+                    {{ atividade.data_hora_evento|date:"d/m/Y H:i" }}
                 </span>
             </div>
 

@@ -133,11 +133,17 @@ def dashboard_coordenador(request):
 def dashboard_org(request):
     org = OrgAcademica.objects.get(usuario=request.user)
 
+    atividades_internas = AtividadeComplementar.objects.filter(
+        organizacao=org,
+        tipo_origem=AtividadeComplementar.Origem.INTERNA
+    ).order_by('-id')
+
     return render(
         request,
         'dashboard_org.html',
         {
-            'org': org
+            'org': org,
+            'atividades_internas': atividades_internas,
         }
     )
 
@@ -210,6 +216,7 @@ def cadastrar_atividade_interna_coordenador(request):
         tipo_atividade_id = request.POST.get('tipo_atividade')
         palestrante = request.POST.get('palestrante')
         local = request.POST.get('local')
+        data_hora_evento = request.POST.get('data_hora_evento')
 
         tipo_atividade = TipoAtividade.objects.get(id=tipo_atividade_id)
 
@@ -218,6 +225,7 @@ def cadastrar_atividade_interna_coordenador(request):
             carga_horaria_solicitada=carga_horaria,
             palestrante=palestrante,
             local=local,
+            data_hora_evento=data_hora_evento,
             tipo_origem=AtividadeComplementar.Origem.INTERNA,
             status=AtividadeComplementar.Status.ABERTA,
             coordenador=coordenador,
@@ -247,6 +255,7 @@ def cadastrar_atividade_interna_org(request):
         tipo_atividade_id = request.POST.get('tipo_atividade')
         palestrante = request.POST.get('palestrante')
         local = request.POST.get('local')
+        data_hora_evento = request.POST.get('data_hora_evento')
 
         tipo_atividade = TipoAtividade.objects.get(id=tipo_atividade_id)
 
@@ -255,6 +264,7 @@ def cadastrar_atividade_interna_org(request):
             carga_horaria_solicitada=carga_horaria,
             palestrante=palestrante,
             local=local,
+            data_hora_evento=data_hora_evento,
             tipo_origem=AtividadeComplementar.Origem.INTERNA,
             status=AtividadeComplementar.Status.ABERTA,
             organizacao=org,
@@ -371,5 +381,6 @@ def qrcode_atividade(request, atividade_id):
             'atividade': atividade,
             'qr_code': qr_base64,
             'url_checkin': url_checkin,
+            'perfil': request.user.perfil
         }
     )

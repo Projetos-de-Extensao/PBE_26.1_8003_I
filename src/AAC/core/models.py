@@ -115,6 +115,11 @@ class AtividadeComplementar(models.Model):
         choices=Origem.choices
     )
 
+    data_hora_evento = models.DateTimeField(
+        null=True,
+        blank=True
+    )
+
     palestrante = models.CharField(
         max_length=100,
         null=True,
