@@ -218,3 +218,127 @@ th {
 .filtros button:active {
     transform: translateY(0);
 }
+
+.qrcode-layout {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 24px;
+    align-items: start;
+}
+
+.qrcode-card {
+    background: white;
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.qrcode-card h2 {
+    margin-bottom: 20px;
+    color: #002b5c;
+}
+
+.info-item {
+    margin-bottom: 16px;
+}
+
+.info-label {
+    display: block;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 4px;
+}
+
+.info-value {
+    color: #002b5c;
+    font-size: 16px;
+}
+
+.qrcode-box {
+    text-align: center;
+}
+
+.qrcode-box img {
+    width: 100%;
+    max-width: 280px;
+    border-radius: 12px;
+    padding: 12px;
+    background: white;
+    border: 1px solid #ddd;
+}
+
+.qrcode-box p {
+    margin-top: 16px;
+    color: #555;
+    font-size: 14px;
+}
+
+.detalhes-card {
+    background: white;
+    border-radius: 14px;
+    padding: 32px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.detalhes-titulo {
+    color: #002b5c;
+    margin-bottom: 10px;
+}
+
+.detalhes-subtitulo {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.info-card {
+    background: #f8f9fb;
+    border-radius: 10px;
+    padding: 18px;
+    /* border-left: 4px solid #ffc20e; */
+}
+
+.info-card h3 {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.info-card p {
+    color: #002b5c;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.descricao-box {
+    background: #f8f9fb;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+}
+
+.descricao-box h3 {
+    color: #002b5c;
+    margin-bottom: 10px;
+}
+
+.descricao-box p {
+    line-height: 1.6;
+    color: #444;
+}
+
+@media (max-width: 900px) {
+    .qrcode-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .qrcode-box {
+        margin-top: 20px;
+    }
+}

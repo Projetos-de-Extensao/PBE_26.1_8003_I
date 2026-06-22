@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+import qrcode
+import base64
+from io import BytesIO
 
 from .models import Aluno, Coordenador, OrgAcademica, AtividadeComplementar, TipoAtividade
 from .services import (
@@ -74,6 +77,11 @@ def dashboard_aluno(request):
 def dashboard_coordenador(request):
     coordenador = Coordenador.objects.get(usuario=request.user)
 
+    atividades_internas = AtividadeComplementar.objects.filter(
+        coordenador=coordenador,
+        tipo_origem=AtividadeComplementar.Origem.INTERNA
+    ).order_by('-id')
+
     atividades_pendentes = ( AtividadeComplementar.objects.filter(
         status=AtividadeComplementar.Status.PENDENTE
     )
@@ -112,6 +120,7 @@ def dashboard_coordenador(request):
         {
             "coordenador": coordenador,
             "atividades_pendentes": atividades_pendentes,
+            "atividades_internas": atividades_internas,
             "cursos": cursos,
             "semestres": semestres,
             "curso_selecionado": curso,
@@ -199,12 +208,16 @@ def cadastrar_atividade_interna_coordenador(request):
         descricao = request.POST.get('descricao')
         carga_horaria = request.POST.get('carga_horaria_solicitada')
         tipo_atividade_id = request.POST.get('tipo_atividade')
+        palestrante = request.POST.get('palestrante')
+        local = request.POST.get('local')
 
         tipo_atividade = TipoAtividade.objects.get(id=tipo_atividade_id)
 
         AtividadeComplementar.objects.create(
             descricao=descricao,
             carga_horaria_solicitada=carga_horaria,
+            palestrante=palestrante,
+            local=local,
             tipo_origem=AtividadeComplementar.Origem.INTERNA,
             status=AtividadeComplementar.Status.ABERTA,
             coordenador=coordenador,
@@ -232,12 +245,16 @@ def cadastrar_atividade_interna_org(request):
         descricao = request.POST.get('descricao')
         carga_horaria = request.POST.get('carga_horaria_solicitada')
         tipo_atividade_id = request.POST.get('tipo_atividade')
+        palestrante = request.POST.get('palestrante')
+        local = request.POST.get('local')
 
         tipo_atividade = TipoAtividade.objects.get(id=tipo_atividade_id)
 
         AtividadeComplementar.objects.create(
             descricao=descricao,
             carga_horaria_solicitada=carga_horaria,
+            palestrante=palestrante,
+            local=local,
             tipo_origem=AtividadeComplementar.Origem.INTERNA,
             status=AtividadeComplementar.Status.ABERTA,
             organizacao=org,
@@ -287,3 +304,72 @@ def rejeitar_atividade(request, atividade_id):
     atividade.save()
 
     return redirect('dashboard_coordenador')
+
+@login_required
+def detalhes_atividade_interna(request, atividade_id):
+
+    atividade = AtividadeComplementar.objects.get(
+        id=atividade_id,
+        tipo_origem=AtividadeComplementar.Origem.INTERNA
+    )
+
+    return render(
+        request,
+        'detalhes_atividade_interna.html',
+        {
+            'atividade': atividade
+        }
+    )
+
+@login_required
+def checkin_atividade(request, atividade_id):
+
+    aluno = Aluno.objects.get(usuario=request.user)
+
+    atividade = AtividadeComplementar.objects.get(
+        id=atividade_id,
+        tipo_origem=AtividadeComplementar.Origem.INTERNA,
+        status=AtividadeComplementar.Status.ABERTA
+    )
+
+    if not atividade.alunos_participantes.filter(id=aluno.id).exists():
+
+        atividade.alunos_participantes.add(aluno)
+
+        aluno.total_horas_integralizadas += (
+            atividade.carga_horaria_solicitada
+        )
+
+        aluno.save()
+
+    return redirect('dashboard_aluno')
+
+@login_required
+def qrcode_atividade(request, atividade_id):
+
+    atividade = AtividadeComplementar.objects.get(
+        id=atividade_id
+    )
+
+    url_checkin = request.build_absolute_uri(
+        f'/atividades/{atividade.id}/checkin/'
+    )
+
+    qr = qrcode.make(url_checkin)
+
+    buffer = BytesIO()
+    qr.save(buffer, format='PNG')
+
+    qr_base64 = base64.b64encode(
+        buffer.getvalue()
+    ).decode()
+
+    return render(
+        request,
+        'qrcode_atividade.html',
+        {
+            'atividade': atividade,
+            'qr_code': qr_base64,
+            'url_checkin': url_checkin,
+        }
+    )

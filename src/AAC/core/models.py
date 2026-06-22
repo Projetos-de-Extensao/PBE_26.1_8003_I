@@ -115,6 +115,18 @@ class AtividadeComplementar(models.Model):
         choices=Origem.choices
     )
 
+    palestrante = models.CharField(
+        max_length=100,
+        null=True,
+        blank=True
+    )
+
+    local = models.CharField(
+        max_length=200,
+        null=True,
+        blank=True
+    )
+
     caminho_comprovante = models.FileField(
         upload_to='comprovantes/',
         null=True,

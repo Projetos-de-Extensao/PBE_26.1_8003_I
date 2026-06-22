@@ -58,5 +58,23 @@ urlpatterns = [
         name='cadastrar_atividade_interna_org'
     ),
 
+    path(
+        'atividades/internas/<int:atividade_id>/',
+        views.detalhes_atividade_interna,
+        name='detalhes_atividade_interna'
+    ),
+
+    path(
+        'atividades/<int:atividade_id>/checkin/',
+        views.checkin_atividade,
+        name='checkin_atividade'
+    ),
+
+    path(
+        'atividades/<int:atividade_id>/qrcode/',
+        views.qrcode_atividade,
+        name='qrcode_atividade'
+    ),
+
     path('logout/', views.logout_view, name='logout'),
 ]

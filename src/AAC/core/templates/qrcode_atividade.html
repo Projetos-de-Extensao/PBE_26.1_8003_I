@@ -1,0 +1,90 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>QR Code da Atividade</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}?v=3">
+</head>
+<body>
+
+<header class="header">
+    <div class="header-left">
+        <img src="{% static 'img/logo_ibmec.png' %}" alt="IBMEC">
+        <h1>QR Code da Atividade</h1>
+    </div>
+
+    <a href="{% url 'dashboard_coordenador' %}" class="logout">
+        Voltar
+    </a>
+</header>
+
+<main class="container">
+
+    <div class="qrcode-layout">
+
+        <div class="qrcode-card">
+
+            <h2>{{ atividade.descricao }}</h2>
+
+            <div class="info-item">
+                <span class="info-label">Tipo de Atividade</span>
+                <span class="info-value">
+                    {{ atividade.tipo_atividade.nome }}
+                </span>
+            </div>
+
+            <div class="info-item">
+                <span class="info-label">Carga Horária</span>
+                <span class="info-value">
+                    {{ atividade.carga_horaria_solicitada }} horas
+                </span>
+            </div>
+
+            <div class="info-item">
+                <span class="info-label">Local</span>
+                <span class="info-value">
+                    {{ atividade.local }}
+                </span>
+            </div>
+
+            <div class="info-item">
+                <span class="info-label">Palestrante</span>
+                <span class="info-value">
+                    {{ atividade.palestrante|default:"Não informado" }}
+                </span>
+            </div>
+
+            <div class="info-item">
+                <span class="info-label">Status</span>
+                <span class="info-value">
+                    {{ atividade.status }}
+                </span>
+            </div>
+
+        </div>
+
+        <div class="qrcode-card qrcode-box">
+
+            <h2>Check-in da Atividade</h2>
+
+            <img
+                src="data:image/png;base64,{{ qr_code }}"
+                alt="QR Code"
+            >
+
+            <p>
+                Os alunos devem escanear este QR Code
+                durante o evento para registrar presença
+                e contabilizar as horas complementares.
+            </p>
+
+        </div>
+
+    </div>
+
+</main>
+
+</body>
+</html>

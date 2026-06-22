@@ -38,6 +38,46 @@
     </div>
 
     <div class="section">
+        <h2>Minhas Atividades Internas</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Descrição</th>
+                    <th>Carga Horária</th>
+                    <th>Status</th>
+                    <th>QR Code</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for atividade in atividades_internas %}
+                    <tr>
+                        <td>{{ atividade.descricao }}</td>
+                        <td>{{ atividade.carga_horaria_solicitada }}</td>
+                        <td>{{ atividade.status }}</td>
+
+                        <td>
+                            <a
+                                href="{% url 'qrcode_atividade' atividade.id %}"
+                                class="btn"
+                            >
+                                Exibir QR Code
+                            </a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4">
+                            Nenhuma atividade interna cadastrada.
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
         <h2>Atividades Pendentes de Validação</h2>
 
         <div class="filtro-container">

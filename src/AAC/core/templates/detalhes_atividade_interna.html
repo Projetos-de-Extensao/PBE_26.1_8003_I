@@ -1,0 +1,76 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes da Atividade</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}?v=3">
+</head>
+<body>
+
+<header class="header">
+    <div class="header-left">
+        <img src="{% static 'img/logo_ibmec.png' %}" alt="IBMEC">
+        <h1>Detalhes da Atividade</h1>
+    </div>
+
+    <a href="{% url 'dashboard_aluno' %}" class="logout">
+        Voltar
+    </a>
+</header>
+
+<main class="container">
+
+    <div class="detalhes-card">
+
+        <h2 class="detalhes-titulo">
+            {{ atividade.tipo_atividade.nome }}
+        </h2>
+
+        <p class="detalhes-subtitulo">
+            Atividade complementar disponível para participação.
+        </p>
+
+        <div class="info-grid">
+
+            <div class="info-card">
+                <h3>Carga Horária</h3>
+                <p>{{ atividade.carga_horaria_solicitada }}h</p>
+            </div>
+
+            <div class="info-card">
+                <h3>Local</h3>
+                <p>{{ atividade.local }}</p>
+            </div>
+
+            <div class="info-card">
+                <h3>Palestrante</h3>
+                <p>
+                    {{ atividade.palestrante|default:"Não informado" }}
+                </p>
+            </div>
+
+            <div class="info-card">
+                <h3>Status</h3>
+                <p>{{ atividade.status }}</p>
+            </div>
+
+        </div>
+
+        <div class="descricao-box">
+
+            <h3>Descrição da Atividade</h3>
+
+            <p>
+                {{ atividade.descricao }}
+            </p>
+
+        </div>
+
+    </div>
+
+</main>
+
+</body>
+</html>
