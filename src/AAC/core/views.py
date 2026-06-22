@@ -74,16 +74,48 @@ def dashboard_aluno(request):
 def dashboard_coordenador(request):
     coordenador = Coordenador.objects.get(usuario=request.user)
 
-    atividades_pendentes = AtividadeComplementar.objects.filter(
+    atividades_pendentes = ( AtividadeComplementar.objects.filter(
         status=AtividadeComplementar.Status.PENDENTE
+    )
+    .select_related('aluno')
+    )
+
+    curso = request.GET.get("curso")
+    semestre = request.GET.get("semestre")
+
+    if curso:
+        atividades_pendentes = atividades_pendentes.filter(
+            aluno__curso=curso
+        )
+
+    if semestre:
+        atividades_pendentes = atividades_pendentes.filter(
+            aluno__semestre_ingresso=semestre
+        )
+
+    cursos = (
+        Aluno.objects
+        .values_list("curso", flat=True)
+        .distinct()
+    )
+
+    semestres = (
+        Aluno.objects
+        .values_list("semestre_ingresso", flat=True)
+        .distinct()
+        .order_by('semestre_ingresso')
     )
 
     return render(
         request,
-        'dashboard_coordenador.html',
+        "dashboard_coordenador.html",
         {
-            'coordenador': coordenador,
-            'atividades_pendentes': atividades_pendentes
+            "coordenador": coordenador,
+            "atividades_pendentes": atividades_pendentes,
+            "cursos": cursos,
+            "semestres": semestres,
+            "curso_selecionado": curso,
+            "semestre_selecionado": semestre,
         }
     )
 

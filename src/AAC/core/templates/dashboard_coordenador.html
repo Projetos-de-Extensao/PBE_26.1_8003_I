@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard Coordenador</title>
-    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}?v=2">
 </head>
 <body>
 
@@ -40,11 +40,47 @@
     <div class="section">
         <h2>Atividades Pendentes de Validação</h2>
 
+        <div class="filtro-container">
+            <form method="GET" class="filtros">
+                <select name="curso">
+                    <option value="">Todos os cursos</option>
+
+                    {% for curso in cursos %}
+                        <option value="{{ curso }}" 
+                            {% if request.GET.curso == curso %}
+                                selected
+                            {% endif %}>
+                            {{ curso }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <select name="semestre">
+                    <option value="">Todos os semestres</option>
+
+                    {% for semestre in semestres %}
+                        <option value="{{ semestre }}" 
+                            {% if request.GET.semestre == semestre|stringformat:"s" %}
+                                selected
+                            {% endif %}>
+                            {{ semestre }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <button type="submit">
+                    Filtrar
+                </button>
+            </form>
+        </div>
+
         <table>
             <thead>
                 <tr>
                     <th>Descrição</th>
                     <th>Aluno</th>
+                    <th>Curso</th>
+                    <th>Semestre</th>
                     <th>Carga Horária</th>
                     <th>Origem</th>
                     <th>Status</th>
@@ -57,6 +93,8 @@
                     <tr>
                         <td>{{ atividade.descricao }}</td>
                         <td>{{ atividade.aluno }}</td>
+                        <td>{{ atividade.aluno.curso }}</td>
+                        <td>{{ atividade.aluno.semestre_ingresso }}</td>
                         <td>{{ atividade.carga_horaria_solicitada }}</td>
                         <td>{{ atividade.tipo_origem }}</td>
                         <td>{{ atividade.status }}</td>

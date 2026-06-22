@@ -164,3 +164,57 @@ th {
 .btn-danger:hover {
     background-color: #900000;
 }
+
+
+.filtro-container {
+    /* background: #f8f9fb; */
+    padding: 5px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    /* border: 1px solid #e5e7eb; */
+}
+
+.filtros {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.filtros select {
+    padding: 10px 14px;
+    border: 1px solid #d5d9df;
+    border-radius: 8px;
+    background: #fff;
+    font-size: 14px;
+    color: #002b6b;
+    min-width: 180px;
+    transition: all 0.2s ease;
+}
+
+.filtros select:focus {
+    outline: none;
+    border-color: #f5b800;
+    box-shadow: 0 0 0 3px rgba(245, 184, 0, 0.2);
+}
+
+.filtros button {
+    background: #f5b800;
+    color: #002b6b;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filtros button:hover {
+    background: #e2aa00;
+    transform: translateY(-1px);
+}
+
+.filtros button:active {
+    transform: translateY(0);
+}
