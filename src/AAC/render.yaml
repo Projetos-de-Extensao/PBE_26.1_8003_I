@@ -1,0 +1,38 @@
+# Render deployment configuration for Django (Workscape/AAC)
+# https://render.com/docs
+
+services:
+- type: web
+  name: workscape-aac
+  runtime: python
+  plan: starter
+  region: oregon
+
+  buildCommand: "pip install -r requirements.txt"
+
+  # Render sets PORT automatically
+  startCommand: "gunicorn aac.wsgi:application --bind 0.0.0.0:$PORT"
+
+  envVars:
+  - key: DJANGO_SETTINGS_MODULE
+    value: aac.settings
+
+  - key: DEBUG
+    value: "0"
+
+  # IMPORTANT: set these in Render as well (or keep SECRET from here)
+  # - key: SECRET_KEY
+  #   value: "your-secret-key"
+
+  # Allowed hosts should include your Render URL.
+  # - key: ALLOWED_HOSTS
+  #   value: "workscape-aac.onrender.com"
+
+  # Persist media/uploads and the SQLite database (OPTION 1: keep SQLite)
+  # Create 2 volumes in Render: one for /opt/render/project/src/AAC/media
+  # and one for /opt/render/project/src/AAC/db.sqlite3
+  # - key: MEDIA_ROOT
+  #   value: "/opt/render/project/src/AAC/media"
+  # - key: SQLITE_DB_PATH
+  #   value: "/opt/render/project/src/AAC/db.sqlite3"
+
