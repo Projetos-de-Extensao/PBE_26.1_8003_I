@@ -3,7 +3,7 @@
 **Código da Disciplina**: IBM8936<br>
 
 ## Sobre 
-Descreva o seu projeto em linhas gerais. 
+Projeto Back-End que teve como objetivo o desenvolvimento de um sistema web para gerenciamento de Atividades Acadêmicas Complementares (AAC) utilizando Django e Django REST Framework.
 
 ## Instalação 
 **Linguagens**: Python, Django<br>
